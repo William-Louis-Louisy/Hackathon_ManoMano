@@ -12,7 +12,7 @@ const Budget = () => {
         InputLabelProps={{
           shrink: true,
         }}
-        className="mt-10"
+        className="mt-14"
       />
 
       <TextField
@@ -22,10 +22,10 @@ const Budget = () => {
         InputLabelProps={{
           shrink: true,
         }}
-        className="mt-10"
+        className="mt-14"
       />
 
-      <Button variant="text" className="mt-10">
+      <Button variant="text" className="mt-14 ">
         Validate
       </Button>
     </div>
