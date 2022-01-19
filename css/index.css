@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #f5f6f7;
+}
+
+.font {
+  color: #003789;
+}
+
+.background {
+  background-color: #f5f6f7;
+}
+
+.card {
+  height: 500px;
+  width: 300px;
+  background-color: white;
+}
+
+.vignette {
+  height: 150px;
+  width: 125px;
+  background: #f5f6f7;
+}
