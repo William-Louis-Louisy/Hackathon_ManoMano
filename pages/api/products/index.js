@@ -17,6 +17,11 @@ async function getProducts(req, res) {
     const products = await Product.getProductsByCategory(
       req.body.productsCategory
     );
+    res.send(201).send(products);
+  } else if (req.body.productsType) {
+    console.log("handling products by type");
+    const products = await Product.getProductsByType(req.body.productsType);
+    res.status(201).send(products);
   } else {
     // Get all the products
     console.log("handling all products");
