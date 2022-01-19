@@ -6,7 +6,7 @@ export default function Layout(props) {
     <div>
       <Header />
 
-      <main className="flex-1 lg:container px-10 py-6 mx-auto md:px-6 md:py-12 background">
+      <main className="flex-1 lg:container px-10 py-7 mx-auto md:px-6 md:py-12 background">
         {props.children}
       </main>
 
