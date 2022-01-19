@@ -16,9 +16,9 @@ async function postWork(req, res) {
   console.log(req);
   if (req.body) {
     console.log("posting work");
-    const newWork = await Works.createWork(req.body);
-    console.log(newWork);
-    res.status(201).send(newWork);
+    const newWorkId = await Works.createWork(req.body);
+    console.log(newWorkId);
+    res.status(201).send({ _id: newWorkId, ...req.body });
   }
 }
 

@@ -6,17 +6,7 @@ const collection = db.collection("works");
 
 function createWork(data) {
   console.log(data);
-  return collection.insertOne({
-    name: data.workName,
-    category: data.category,
-    place: {
-      indoor: data.indoor,
-      outdoor: data.outdoor,
-      rooms: data.rooms,
-    },
-    rawMaterialList: data.rawMaterialList,
-    toolList: data.toolList,
-  });
+  return collection.insertOne(data).then((result) => result.insertedId);
 }
 
 function getWorks(filters) {
