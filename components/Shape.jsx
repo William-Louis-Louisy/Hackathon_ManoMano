@@ -3,15 +3,24 @@ import { FormControlLabel } from "@mui/material";
 import { Checkbox } from "@mui/material";
 
 const Shape = () => {
-  const [label, setLabel] = useState("");
-  const labels = () => {
-    label = { label: "Rectangular", label: "Oval", label: "Round" };
-  };
+  const [labels, setLabels] = useState([
+    { name: "Rectangular", number: "30" },
+    { name: "Oval", number: "30" },
+    { name: "Rouded", number: "30" },
+  ]);
+
   return (
-    <div className="flex flex-col justify-between items-center h-auto gap-8 mt-14">
-      <FormControlLabel control={<Checkbox />} label="Label" />
-      <FormControlLabel control={<Checkbox />} label="Label" />
-      <FormControlLabel control={<Checkbox />} label="Label" />
+    <div className="flex flex-col justify-between  gap-10 h-auto mt-14">
+      {labels.map((label) => {
+        return (
+          <>
+            <div className="flex items-center">
+              <FormControlLabel control={<Checkbox />} label={label.name} />
+              <p className="text-xs font-light">{label.number}</p>
+            </div>
+          </>
+        );
+      })}
     </div>
   );
 };
