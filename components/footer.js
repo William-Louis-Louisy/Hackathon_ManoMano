@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="bg-white">
-      <ul className="flex items-center justify-between lg:container px-4 py-4 mx-auto text-sm font md:px-6">
+      <ul className="flex items-center justify-between lg:container px-4 py-4  mx-auto text-sm font md:px-6">
         <li>
           Created by{" "}
           <a
