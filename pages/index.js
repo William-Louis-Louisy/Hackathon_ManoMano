@@ -1,10 +1,79 @@
 import Card from "@components/Card";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function IndexPage() {
+  const [questionNumber, setQuestionNumber] = useState(3);
+  const [filters, setFilters] = useState({});
+
+  console.log("question number : ", questionNumber);
+
+  const userJourney = [
+    {
+      questionNumber: 0,
+      content: "Would you like a personalized support ? ",
+      type: "beginning",
+    },
+    {
+      questionNumber: 1,
+      content: "What are you looking for ?",
+      type: "search",
+    },
+    {
+      questionNumber: 2,
+      content: "What is your level ?",
+      type: "level",
+    },
+    {
+      questionNumber: 3,
+      content: "Where are the works located ?",
+      type: "place",
+    },
+    {
+      questionNumber: 4,
+      content: "On which room are you going to work",
+      type: "room",
+    },
+    {
+      questionNumber: 5,
+      content: "For what kind of works ?",
+      type: "category",
+    },
+    {
+      questionNumber: 6,
+      content: "For what kind of equipment ?",
+      type: "equipment",
+    },
+    {
+      questionNumber: 7,
+      content: "For what kind of product ?",
+      type: "product",
+    },
+    {
+      questionNumber: 8,
+      content: "What is your budget (tools and screws include)?",
+      type: "price",
+    },
+    {
+      questionNumber: 9,
+      content: "Which shape do you want ?",
+      type: "shape",
+    },
+    {
+      questionNumber: 10,
+      content: "Which size do you need ?",
+      type: "size",
+    },
+  ];
   return (
     <div className="flex flex-col items-center justify-center space-y-12">
-      <Card question="Would you like a personalized support ?" />
+      <Card
+        question={userJourney[questionNumber]}
+        filters={filters}
+        setFilters={setFilters}
+        questionNumber={questionNumber}
+        setQuestionNumber={setQuestionNumber}
+      />
     </div>
   );
 }

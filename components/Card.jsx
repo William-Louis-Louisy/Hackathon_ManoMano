@@ -1,11 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Vignette from "./Vignette";
-import CancelIcon from "@mui/icons-material/Cancel";
+import axios from "axios";
 
-const Card = ({ question }) => {
+const Card = ({
+  question,
+  filters,
+  setFilters,
+  questionNumber,
+  setQuestionNumber,
+}) => {
+  const [vignettes, setVignettes] = useState();
+
+  async function getData() {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+      {
+        params: {filters: filters}
+      }
+    );
+    setVignettes(res.data);
+  }
+
+  useEffect(() => {
+    getData();
+  }, [questionNumber]);
+
+  if (!vignettes) {
+    return "Loading...";
+  }
+
+  console.log("vignettes : ", vignettes);
   return (
     <div className="card flex flex-col items-center rounded-2xl">
-      {/* <CancelIcon className="relative left-32 mt-2" sx={{ fontSize: 30 }} /> */}
       <a href="https://www.manomano.fr/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -22,13 +48,26 @@ const Card = ({ question }) => {
           />
         </svg>
       </a>
-      <h2 className="mt-4 text-center text-xl font font-bold">{question}</h2>
+      <h2 className="mt-4 text-center text-xl font font-bold">
+        {question.content}
+      </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
-        <Vignette picture="/home.png" title=" HOME HOME HOME" />
-        <Vignette picture="/home.png" title="HOME" />
-        <Vignette picture="/home.png" title="HOME" />
-        <Vignette picture="/home.png" title="HOME" />
+        {vignettes.map((vignette) => {
+          return (
+            <>
+              <Vignette
+                picture={vignette.picture}
+                title={vignette[`${question.type}`]}
+                type={question.type}
+                filters={filters}
+                setFilters={setFilters}
+                questionNumber={questionNumber}
+                setQuestionNumber={setQuestionNumber}
+              />
+            </>
+          );
+        })}
       </div>
     </div>
   );
