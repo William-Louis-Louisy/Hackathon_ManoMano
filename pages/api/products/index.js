@@ -2,12 +2,25 @@ import base from "../../../middlewares/common";
 import Product from "../../../models/product";
 
 async function getProducts(req, res) {
-  if (req.body) {
-    console.log("handling product");
-    const products = await Product.getManyProducts(req.body);
+  //get Many products by Id
+  if (req.body.listOfProducts) {
+    console.log("handling list of products");
+    const products = await Product.getManyProductsById(req.body.listOfProducts);
     res.status(201).send(products);
+    // get One product by Id
+  } else if (req.body.productId) {
+    console.log("handling one product");
+    const product = await Product.getOneProduct(req.body.productId);
+    res.status(201).send(product);
+  } else if (req.body.productsCategory) {
+    console.log("handling products by category");
+    const products = await Product.getProductsByCategory(
+      req.body.productsCategory
+    );
   } else {
-    const products = await Product.getManyProducts();
+    // Get all the products
+    console.log("handling all products");
+    const products = await Product.getAllProducts();
     res.status(201).send(products);
   }
 }
@@ -15,8 +28,12 @@ async function getProducts(req, res) {
 async function postProducts(req, res) {
   if (req.body) {
     console.log("posting product");
-    const newProduct = await Product.createProduct(req.body);
-    res.status(204).send(newProduct);
+    const newProductId = await Product.createProduct(req.body);
+    console.log("new Product : ", newProductId);
+    res.status(200).send({
+      _id: newProductId,
+      ...req.body,
+    });
   }
 }
 
