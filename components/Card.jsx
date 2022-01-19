@@ -18,7 +18,20 @@ const Card = ({
         params: {filters: filters}
       }
     );
-    setVignettes(res.data);
+    const newVignettes = sortVignettes(res.data)
+    setVignettes(newVignettes);
+  }
+
+  function sortVignettes(vignettes){ 
+    let typeAlreadyExist = [];
+
+    let sortedVignettes = vignettes.filter((vignette) => {
+      if(!typeAlreadyExist.includes(vignette[`${question.type}`])){
+        typeAlreadyExist.push(vignette[`${question.type}`]);
+        return vignette
+      }
+    })
+    return sortedVignettes
   }
 
   useEffect(() => {
