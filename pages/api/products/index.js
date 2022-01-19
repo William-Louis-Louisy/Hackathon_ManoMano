@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import base from "../../../middlewares/common";
 import Product from "../../../models/product";
 
@@ -5,8 +6,9 @@ async function getProducts(req, res) {
   //get Many products by Id
   if (req.body.listOfProducts) {
     console.log("handling list of products");
-    const products = await Product.getManyProductsById(req.body.listOfProducts);
-    res.status(201).send(products);
+    const listId = req.body.listOfProducts.map((id) => ObjectId(id));
+    const products = await Product.getManyProductsById(listId);
+    res.status(200).send(products);
     // get One product by Id
   } else if (req.body.productId) {
     console.log("handling one product");
