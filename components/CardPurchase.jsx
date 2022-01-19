@@ -2,6 +2,12 @@ import React from "react";
 import Items from "./Items";
 
 const CardPurchase = () => {
+  const items = [
+    { img: "/home.png", name: "Tourne-vis" },
+    { img: "/home.png", name: "Perceuse" },
+    { img: "/home.png", name: "Marteau" },
+  ];
+
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <a href="https://www.manomano.fr/">
@@ -24,7 +30,13 @@ const CardPurchase = () => {
         For this products <br />
         you maybe need :
       </h2>
-      <Items />
+      {items.map((item) => {
+        return (
+          <>
+            <Items name={item.name} img={item.img} />
+          </>
+        );
+      })}
     </div>
   );
 };
