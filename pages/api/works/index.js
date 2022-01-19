@@ -2,9 +2,9 @@ import base from "../../../middlewares/common";
 import Works from "../../../models/works";
 
 async function getWorks(req, res) {
-  if (req.body) {
+  if (req.body.filters) {
     console.log("handling works");
-    const works = await Works.getWorks(req.body);
+    const works = await Works.getWorks(req.body.filters);
     res.status(201).send(works);
   } else {
     const works = await Works.getWorks();

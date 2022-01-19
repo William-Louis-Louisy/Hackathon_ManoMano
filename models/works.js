@@ -10,6 +10,7 @@ function createWork(data) {
 }
 
 function getWorks(filters) {
+  console.log("filters :", filters);
   return collection.find(filters).toArray();
 }
 
