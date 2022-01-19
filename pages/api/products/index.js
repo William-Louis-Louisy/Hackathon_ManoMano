@@ -12,15 +12,9 @@ async function getProducts(req, res) {
     console.log("handling one product");
     const product = await Product.getOneProduct(req.body.productId);
     res.status(201).send(product);
-  } else if (req.body.productsCategory) {
-    console.log("handling products by category");
-    const products = await Product.getProductsByCategory(
-      req.body.productsCategory
-    );
-    res.send(201).send(products);
-  } else if (req.body.productsType) {
-    console.log("handling products by type");
-    const products = await Product.getProductsByType(req.body.productsType);
+  } else if (req.body.filters) {
+    console.log("handling products with filters");
+    const products = await Product.getProductsByFilters(req.body.filters);
     res.status(201).send(products);
   } else {
     // Get all the products

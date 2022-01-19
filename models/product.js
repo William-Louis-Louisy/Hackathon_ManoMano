@@ -18,12 +18,8 @@ function getManyProductsById(listOfProductsId) {
     .toArray();
 }
 
-function getProductsByCategory(category) {
-  return collection.find({ category: category }).toArray();
-}
-
-function getProductsByType(type) {
-  return collection.find({ type: type }).toArray();
+function getProductsByFilters(filters) {
+  return collection.find(filters).toArray();
 }
 
 function getAllProducts() {
@@ -37,8 +33,7 @@ function getOneProduct(id) {
 module.exports = {
   createProduct,
   getManyProductsById,
-  getProductsByCategory,
-  getProductsByType,
+  getProductsByFilters,
   getAllProducts,
   getOneProduct,
 };
