@@ -1,6 +1,7 @@
 import React from "react";
 import Vignette from "./Vignette";
 import Budget from "./Budget";
+import Shape from "./Shape";
 
 const Card = ({ question }) => {
   return (
@@ -23,12 +24,13 @@ const Card = ({ question }) => {
       </a>
       <h2 className="mt-4 text-center text-xl font font-bold">{question}</h2>
 
-      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
+      {/* <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
         <Vignette picture="/home.png" title=" HOME HOME HOME" />
         <Vignette picture="/home.png" title="HOME" />
         <Vignette picture="/home.png" title="HOME" />
         <Vignette picture="/home.png" title="HOME" />
-      </div>
+      </div> */}
+      <Shape />
     </div>
   );
 };
