@@ -1,11 +1,10 @@
 import React from "react";
 import Vignette from "./Vignette";
-import CancelIcon from "@mui/icons-material/Cancel";
+import Budget from "./Budget";
 
 const Card = ({ question }) => {
   return (
     <div className="card flex flex-col items-center rounded-2xl">
-      {/* <CancelIcon className="relative left-32 mt-2" sx={{ fontSize: 30 }} /> */}
       <a href="https://www.manomano.fr/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
