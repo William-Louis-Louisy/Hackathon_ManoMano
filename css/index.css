@@ -22,7 +22,7 @@ body {
 }
 
 .vignette {
-  height: 150px;
+  min-height: 150px;
   width: 125px;
   background: #f5f6f7;
 }

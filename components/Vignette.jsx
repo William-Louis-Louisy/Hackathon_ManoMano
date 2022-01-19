@@ -7,7 +7,9 @@ const Vignette = ({ picture, title }) => {
     <div className="vignette my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl">
       {/* <h1 className="font font-bold">IMAGE</h1> */}
       <img src={picture} alt="Category image" className="w-3/5" />
-      <h1 className="font font-bold pb-2">{title}</h1>
+      <h1 className="font font-bold pb-2 w-10/12 text-center overflow-hidden flex flex-col">
+        {title}
+      </h1>
     </div>
   );
 };
