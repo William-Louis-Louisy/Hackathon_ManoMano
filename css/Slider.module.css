@@ -11,6 +11,8 @@
   box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.4);
   border-right: white solid 2px;
   border-left: white solid 2px;
+  border-radius: 12px;
+  height: 55%;
 }
 
 .wrapper::-webkit-scrollbar {
