@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function IndexPage() {
-  const [questionNumber, setQuestionNumber] = useState(2);
+  const [questionNumber, setQuestionNumber] = useState(1);
   const [filters, setFilters] = useState([{}, {}]);
 
   const userJourney = [
