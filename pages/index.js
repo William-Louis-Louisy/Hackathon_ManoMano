@@ -1,4 +1,5 @@
 import Card from "@components/Card";
+import CardLookingFor from "@components/CardLookingFor";
 import CardShopping from "@components/CardShopping";
 import Loading from "@components/Loading";
 import WelcomeCard from "@components/WelcomeCard";
@@ -67,9 +68,7 @@ export default function IndexPage() {
     },
   ];
 
-  console.log("filters : ", filters);
-  console.log("current filter: ", filters[questionNumber - 2]);
-  console.log("question number: ", questionNumber - 1);
+  console.log("question", userJourney[questionNumber]);
   return (
     <div className="flex flex-col items-center justify-center space-y-12">
       {questionNumber >= 2 ? (
@@ -81,7 +80,9 @@ export default function IndexPage() {
           setQuestionNumber={setQuestionNumber}
         />
       ) : questionNumber === 0 ? (
-        <WelcomeCard />
+        <WelcomeCard setQuestionNumber={setQuestionNumber} />
+      ) : questionNumber === 1 ? (
+        <CardLookingFor setQuestionNumber={setQuestionNumber} />
       ) : (
         ""
       )}

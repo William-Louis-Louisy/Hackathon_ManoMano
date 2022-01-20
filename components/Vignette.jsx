@@ -5,22 +5,19 @@ import { motion } from "framer-motion";
 import axios from "axios";
 
 const Vignette = ({ name, type, setFilters, setQuestionNumber, filters, questionNumber }) => {
+  console.log('name: ', name);
   const [imgUrl, setImgUrl] = useState("");
-
-  async function getImage(){
-    console.log("type & name: ", type, name)
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_HOST_API_URL}/api/images`,
-    {
-      params: { filters: {type: type, name: name} },
-    });
-    setImgUrl(res.data[0]?.imgUrl);
+  async function getImage(){    
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_HOST_API_URL}/api/images`,
+      {
+        params: { filters: {type: type, name: name} },
+      });
+      setImgUrl(res.data[0]?.imgUrl);
   }
 
   useEffect(() => {
     getImage();
   }, [questionNumber])
-
-  console.log("imgUrl", imgUrl);
   return (
     <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
     <div className="vignette my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl"  
@@ -31,7 +28,7 @@ const Vignette = ({ name, type, setFilters, setQuestionNumber, filters, question
     }}>
       {/* <h1 className="font font-bold">IMAGE</h1> */}
       <img src={imgUrl} alt="Category image" className="w-3/5" />
-      <h1 className="font font-bold pb-2 text-center flex flex-col mt-1">{name}</h1>
+      <h1 className="font font-bold pb-2 text-center flex flex-col mt-1">{typeof name === "string" ? name.toUpperCase() : name}</h1>
     </div>
     </motion.button>
   );

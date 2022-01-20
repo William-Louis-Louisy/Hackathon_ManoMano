@@ -5,6 +5,8 @@ import Budget from "./Budget";
 import Shape from "./Shape";
 import BackBtn from "./BackBtn";
 
+import uniqid from "uniqid";
+
 const Card = ({
   question,
   filters,
@@ -15,14 +17,14 @@ const Card = ({
   const [vignettes, setVignettes] = useState();
 
   async function getData() {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
-      {
-        params: { filters: filters[questionNumber-2] },
-      }
-    );
-    const newVignettes = sortVignettes(res.data);
-    setVignettes(newVignettes);
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+        {
+          params: { filters: filters[questionNumber-2] },
+        }
+      );
+      const newVignettes = sortVignettes(res.data);
+      setVignettes(newVignettes);
   }
 
   function sortVignettes(vignettes){ 
@@ -60,7 +62,6 @@ const Card = ({
   if (!vignettes) {
     return "Loading...";
   }
-
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -95,7 +96,7 @@ const Card = ({
         {vignettes.map((vignette) => {
           return (
               <Vignette
-                key={vignette._id}
+                key={uniqid()}
                 name={vignette[`${question.type}`]}
                 type={question.type}
                 filters={filters}

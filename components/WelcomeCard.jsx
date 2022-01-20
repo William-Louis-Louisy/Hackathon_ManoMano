@@ -2,7 +2,7 @@
 import React from "react";
 import Btn from "./Btn";
 
-function WelcomeCard({ question }) {
+function WelcomeCard({ question, setQuestionNumber }) {
   return (
     <div>
       <div className="card flex flex-col items-center rounded-2xl">
@@ -29,7 +29,7 @@ function WelcomeCard({ question }) {
         </h2>
 
         <span className="flex flex-row gap-6 mt-4">
-          <Btn content="YES" />
+          <div onClick={() => setQuestionNumber(1)}><Btn content="YES" /></div>
           <a href="https://www.manomano.fr/">
             <Btn content="NO" />
           </a>
