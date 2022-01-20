@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const client = new MongoClient(process.env.DATABASE_URL);
+const client = new MongoClient("mongodb://localhost:27017/hackathonManoMano");
 client.connect();
 
 const database = client.db("hackathonManoMano");
