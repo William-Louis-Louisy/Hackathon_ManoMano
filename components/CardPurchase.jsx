@@ -1,15 +1,18 @@
 import React from "react";
 import Items from "./Items";
+import style from "../css/Slider.module.css";
 
 const CardPurchase = () => {
   const items = [
-    { img: "/home.png", name: "Tourne-vis" },
-    { img: "/home.png", name: "Perceuse" },
-    { img: "/home.png", name: "Marteau" },
+    { img: "/home.png", name: "Tourne-vis", price: 35 },
+    { img: "/home.png", name: "Perceuse", price: 22 },
+    { img: "/home.png", name: "Marteau", price: 33 },
+    { img: "/home.png", name: "Marteau", price: 33 },
+    { img: "/home.png", name: "Marteau", price: 33 },
   ];
 
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center justify-between rounded-2xl">
       <a href="https://www.manomano.fr/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -30,13 +33,23 @@ const CardPurchase = () => {
         For this products <br />
         you maybe need :
       </h2>
-      {items.map((item) => {
-        return (
-          <>
-            <Items name={item.name} img={item.img} />
-          </>
-        );
-      })}
+      <div className={style.wrapper + " wrapper"}>
+        <div className={style.slider}>
+          {items.map((item) => {
+            return (
+              <>
+                <Items name={item.name} img={item.img} />
+              </>
+            );
+          })}
+        </div>
+      </div>
+      <h3 className="text-2xl font">
+        Total ={" "}
+        {Object.keys(items).reduce(function (previous, key) {
+          return previous + items[key].price;
+        }, 0)}
+      </h3>
     </div>
   );
 };
