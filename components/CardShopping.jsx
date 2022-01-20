@@ -21,7 +21,7 @@ function CardShopping({ question }) {
         </svg>
       </a>
       <div className=" flex flex-col items-center ">
-        <h2 className="mt-12 mx-6 text-center text-2xl font font-bold">
+        <h2 className="my-12 mx-6 text-center text-2xl font font-bold">
           {question}
         </h2>
         <ProductCard
