@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 function ProductCard({ url, name, price }) {
   return (
@@ -24,12 +25,17 @@ function ProductCard({ url, name, price }) {
 
           <div className="flex space-x-4 mb-6 text-sm font-medium">
             <div className="flex-row flex space-x-4">
-              <button
-                className="h-10 px-6 font-semibold rounded-md bg-gradient-to-r from-manoblue to-manoblue w-20 text-manowhite hover:from-logofirst hover:to-logosecond flex flex-row items-center justify-center"
-                type="submit"
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                BUY
-              </button>
+                <button
+                  className="h-10 px-6 font-semibold rounded-md bg-gradient-to-r from-manoblue to-manoblue w-20 text-manowhite hover:from-logofirst hover:to-logosecond flex flex-row items-center justify-center"
+                  type="submit"
+                >
+                  BUY
+                </button>
+              </motion.button>
             </div>
             <button
               className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300"
