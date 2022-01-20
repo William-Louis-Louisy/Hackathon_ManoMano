@@ -1,12 +1,15 @@
 import React from "react";
 import BackBtn from "./BackBtn";
 import Items from "./Items";
+import style from "../css/Slider.module.css";
 
 const CardPurchase = () => {
   const items = [
-    { img: "/home.png", name: "Tourne-vis" },
-    { img: "/home.png", name: "Perceuse" },
-    { img: "/home.png", name: "Marteau" },
+    { img: "/home.png", name: "Tourne-vis", price: 35 },
+    { img: "/home.png", name: "Perceuse", price: 22 },
+    { img: "/home.png", name: "Marteau", price: 33 },
+    { img: "/home.png", name: "Marteau", price: 33 },
+    { img: "/home.png", name: "Marteau", price: 33 },
   ];
 
   return (
@@ -32,15 +35,25 @@ const CardPurchase = () => {
       </span>
       <h2 className="mt-4 text-center text-xl font font-bold">
         For this products <br />
-        you maybe need :
+        you may need :
       </h2>
-      {items.map((item) => {
-        return (
-          <>
-            <Items name={item.name} img={item.img} />
-          </>
-        );
-      })}
+      <div className={style.wrapper + " wrapper"}>
+        <div className={style.slider}>
+          {items.map((item) => {
+            return (
+              <>
+                <Items name={item.name} img={item.img} />
+              </>
+            );
+          })}
+        </div>
+      </div>
+      <h3 className="text-2xl font">
+        Total ={" "}
+        {Object.keys(items).reduce(function (previous, key) {
+          return previous + items[key].price;
+        }, 0)}
+      </h3>
     </div>
   );
 };

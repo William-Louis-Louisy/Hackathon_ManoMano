@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Vignette from "./Vignette";
+import axios from "axios";
 import Budget from "./Budget";
 import Shape from "./Shape";
 import BackBtn from "./BackBtn";
 
-const Card = ({ question }) => {
+const Card = ({
+  question,
+  filters,
+  setFilters,
+  questionNumber,
+  setQuestionNumber,
+}) => {
+  const [vignettes, setVignettes] = useState();
+
+  async function getData() {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+      {
+        params: { filters: filters },
+      }
+    );
+    const newVignettes = sortVignettes(res.data);
+    setVignettes(newVignettes);
+  }
+
+  function sortVignettes(vignettes) {
+    let typeAlreadyExist = [];
+
+    let sortedVignettes = vignettes.filter((vignette) => {
+      if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
+        typeAlreadyExist.push(vignette[`${question.type}`]);
+        return vignette;
+      }
+    });
+    return sortedVignettes;
+  }
+
+  useEffect(() => {
+    getData();
+  }, [questionNumber]);
+
+  if (!vignettes) {
+    return "Loading...";
+  }
+
+  console.log("vignettes : ", vignettes);
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -26,13 +67,26 @@ const Card = ({ question }) => {
           </svg>
         </a>
       </span>
-      <h2 className="mt-4 text-center text-xl font font-bold">{question}</h2>
+      <h2 className="mt-4 text-center text-xl font font-bold">
+        {question.content}
+      </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
-        <Vignette picture="/home.png" title=" HOME HOME HOME" />
-        <Vignette picture="/home.png" title="HOME" />
-        <Vignette picture="/home.png" title="HOME" />
-        <Vignette picture="/home.png" title="HOME" />
+        {vignettes.map((vignette) => {
+          return (
+            <>
+              <Vignette
+                picture={vignette.picture}
+                title={vignette[`${question.type}`]}
+                type={question.type}
+                filters={filters}
+                setFilters={setFilters}
+                questionNumber={questionNumber}
+                setQuestionNumber={setQuestionNumber}
+              />
+            </>
+          );
+        })}
       </div>
     </div>
   );

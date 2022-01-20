@@ -13,7 +13,7 @@ const Items = ({ name, img }) => {
         priority
         alt="ManoMano logo"
       />
-      <h2 className="text-xl">{name}</h2>
+      <h2 className="text-xl font">{name}</h2>
       <DeleteForeverIcon sx={{ fontSize: 30 }} />
     </div>
   );
