@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Vignette2 from "./Vignette2";
+import Vignette from "./Vignette";
 import axios from "axios";
 import BackBtn from "./BackBtn";
 
@@ -28,6 +28,7 @@ const Card = ({
     const res = await axios.get("http://localhost:3000/api/images", {
       params: { type: question.type },
     });
+    console.log("here : ", res.data)
     setVignettes(res.data);
   }
 
@@ -76,6 +77,7 @@ const Card = ({
   if (!vignettes) {
     return "Loading...";
   }
+  console.log("vignettes : ", vignettes)
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -114,8 +116,9 @@ const Card = ({
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
         {vignettes.map((vignette) => {
+          console.log("vignettes in admin: ", vignette)
           return (
-            <Vignette2
+            <Vignette
               key={vignette._id}
               picture={vignette.imgUrl}
               title={vignette.name}
