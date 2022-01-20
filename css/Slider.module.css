@@ -1,0 +1,23 @@
+.wrapper {
+  display: block;
+  width: 100%;
+  overflow-x: scroll;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+  -ms-overflow-style: none;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.slider {
+  display: block;
+  white-space: nowrap;
+}
+
+.item {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}

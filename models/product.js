@@ -5,14 +5,35 @@ const collection = db.collection("products");
 // CRUD for products
 
 function createProduct(informations) {
-  return collection.insertOne({ name: informations.name });
+  return collection.insertOne(informations).then((result) => result.insertedId);
 }
 
-function getManyProducts(filtres) {
+function getManyProductsById(listOfProductsId) {
+  return collection
+    .find({
+      _id: {
+        $in: listOfProductsId,
+      },
+    })
+    .toArray();
+}
+
+function getProductsByFilters(filters) {
+  return collection.find(filters).toArray();
+}
+
+function getAllProducts() {
   return collection.find().toArray();
+}
+
+function getOneProduct(id) {
+  return collection.find({ _id: ObjectId(id) }).next();
 }
 
 module.exports = {
   createProduct,
-  getManyProducts,
+  getManyProductsById,
+  getProductsByFilters,
+  getAllProducts,
+  getOneProduct,
 };
