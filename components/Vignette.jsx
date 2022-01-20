@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import axios from "axios";
 
 const Vignette = ({ name, type, setFilters, setQuestionNumber, filters, questionNumber }) => {
-  console.log('name: ', name);
   const [imgUrl, setImgUrl] = useState("");
   async function getImage(){    
       const res = await axios.get(`${process.env.NEXT_PUBLIC_HOST_API_URL}/api/images`,
