@@ -6,8 +6,7 @@ const Vignette = ({ picture, title, type, setFilters, setQuestionNumber, filters
   return (
     <div className="vignette my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl"  
     onClick={() => {
-      console.log("hello")
-      setFilters({ ...filters, [`${type}`]: `${title}` });
+      setFilters([...filters, { ...filters[questionNumber], [`${type}`]: `${title}` }]);
       const newQuestionNumber = questionNumber +1
       setQuestionNumber(newQuestionNumber);
     }}>

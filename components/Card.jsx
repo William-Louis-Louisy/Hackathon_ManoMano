@@ -18,38 +18,58 @@ const Card = ({
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
       {
-        params: { filters: filters },
+        params: { filters: filters[questionNumber-2] },
       }
     );
     const newVignettes = sortVignettes(res.data);
     setVignettes(newVignettes);
   }
 
-  function sortVignettes(vignettes) {
+  function sortVignettes(vignettes){ 
+    if(vignettes.length === 0){
+      return [{[`${question.type}`]: ""}]
+    }
     let typeAlreadyExist = [];
-
-    let sortedVignettes = vignettes.filter((vignette) => {
-      if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
-        typeAlreadyExist.push(vignette[`${question.type}`]);
-        return vignette;
-      }
-    });
-    return sortedVignettes;
+    let sortedVignettes = [];
+    if(typeof vignettes[0][`${question.type}`] === "object"){
+      vignettes.map((vignette) => {
+        vignette[`${question.type}`].map((type) => {
+          if(!typeAlreadyExist.includes(type)){
+            typeAlreadyExist.push(type);
+          }
+        })
+      })
+      sortedVignettes = typeAlreadyExist.map((type) => {return {[`${question.type}`]: type}})
+    } else {
+      sortedVignettes = vignettes.filter((vignette) => {
+        if(!typeAlreadyExist.includes(vignette[`${question.type}`])){
+          typeAlreadyExist.push(vignette[`${question.type}`]);
+          return vignette
+        }
+      })
+    }
+    return sortedVignettes
   }
 
   useEffect(() => {
-    getData();
+    if(questionNumber >=2){
+      getData();
+    }
   }, [questionNumber]);
 
   if (!vignettes) {
     return "Loading...";
   }
 
-  console.log("vignettes : ", vignettes);
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
-        <BackBtn />
+        <div onClick={() => {
+          const newFilters = filters.filter((f, i) => i!== filters.length-1);
+          setFilters(newFilters);
+          const newQuestionNumber = questionNumber -1;
+          setQuestionNumber(newQuestionNumber);
+        }}><BackBtn /></div>
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -74,8 +94,8 @@ const Card = ({
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
         {vignettes.map((vignette) => {
           return (
-            <>
               <Vignette
+                key={vignette._id}
                 picture={vignette.picture}
                 title={vignette[`${question.type}`]}
                 type={question.type}
@@ -84,7 +104,6 @@ const Card = ({
                 questionNumber={questionNumber}
                 setQuestionNumber={setQuestionNumber}
               />
-            </>
           );
         })}
       </div>

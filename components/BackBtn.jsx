@@ -1,10 +1,9 @@
 import React from "react";
 
-function BackBtn({ onClickFunction }) {
+function BackBtn() {
   return (
     <>
       <button
-        onClick={onClickFunction ? onClickFunction : ""}
         className="flex flex-row cursor-pointer text-manoblue"
       >
         <svg
