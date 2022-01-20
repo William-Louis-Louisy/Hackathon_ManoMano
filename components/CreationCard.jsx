@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Vignette from "./Vignette";
+import Vignette2 from "./Vignette2";
 import axios from "axios";
-import Budget from "./Budget";
-import Shape from "./Shape";
 import BackBtn from "./BackBtn";
 
 const Card = ({
@@ -14,55 +12,63 @@ const Card = ({
 }) => {
   const [vignettes, setVignettes] = useState();
 
-  async function getData() {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
-      {
-        params: { filters: filters[questionNumber - 2] },
-      }
-    );
-    const newVignettes = sortVignettes(res.data);
-    setVignettes(newVignettes);
-  }
+  console.log("logging the filters", filters);
 
-  function sortVignettes(vignettes) {
-    if (vignettes.length === 0) {
-      return [{ [`${question.type}`]: "" }];
-    }
-    let typeAlreadyExist = [];
-    let sortedVignettes = [];
-    if (typeof vignettes[0][`${question.type}`] === "object") {
-      vignettes.map((vignette) => {
-        vignette[`${question.type}`].map((type) => {
-          if (!typeAlreadyExist.includes(type)) {
-            typeAlreadyExist.push(type);
-          }
-        });
-      });
-      sortedVignettes = typeAlreadyExist.map((type) => {
-        return { [`${question.type}`]: type };
-      });
-    } else {
-      sortedVignettes = vignettes.filter((vignette) => {
-        if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
-          typeAlreadyExist.push(vignette[`${question.type}`]);
-          return vignette;
-        }
-      });
-    }
-    return sortedVignettes;
-  }
+  //   function sortVignettes(vignettes) {
+  //     if (vignettes.length === 0) {
+  //       return [{ [`${question.type}`]: "" }];
+  //     }
+  //     let typeAlreadyExist = [];
+  //     let sortedVignettes = [];
+  //     if (typeof vignettes[0][`${question.type}`] === "object") {
+  //       vignettes.map((vignette) => {
+  //         vignette[`${question.type}`].map((type) => {
+  //           if (!typeAlreadyExist.includes(type)) {
+  //             typeAlreadyExist.push(type);
+  //           }
+  //         });
+  //       });
+  //       sortedVignettes = typeAlreadyExist.map((type) => {
+  //         return { [`${question.type}`]: type };
+  //       });
+  //     } else {
+  //       sortedVignettes = vignettes.filter((vignette) => {
+  //         if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
+  //           typeAlreadyExist.push(vignette[`${question.type}`]);
+  //           return vignette;
+  //         }
+  //       });
+  //     }
+  //     return sortedVignettes;
+  //   }
 
   useEffect(() => {
-    if (questionNumber >= 2) {
+    if (questionNumber === 0 || questionNumber === 1) {
+      getFirstQuestions();
+    } else {
       getData();
     }
   }, [questionNumber]);
 
+  async function getFirstQuestions() {
+    const res = await axios.get("http://localhost:3000/api/images", {
+      params: { type: question.type },
+    });
+    setVignettes(res.data);
+  }
+
+  async function getData() {
+    const res = await axios.get("http://localhost:3000/api/works", {
+      params: { filters: filters },
+    });
+    const foundProjects = res.data;
+    console.log("type", question.type);
+    console.log(foundProjects.map((project) => project[question.type]));
+  }
+
   if (!vignettes) {
     return "Loading...";
   }
-
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -102,10 +108,10 @@ const Card = ({
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
         {vignettes.map((vignette) => {
           return (
-            <Vignette
+            <Vignette2
               key={vignette._id}
-              picture={vignette.picture}
-              title={vignette[`${question.type}`]}
+              picture={vignette.imgUrl}
+              title={vignette.name}
               type={question.type}
               filters={filters}
               setFilters={setFilters}

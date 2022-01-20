@@ -1,6 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
-import Image from "next/image";
 
 const Vignette = ({
   picture,
@@ -11,16 +9,17 @@ const Vignette = ({
   filters,
   questionNumber,
 }) => {
+  console.log("that fucking filters", filters);
   return (
     <div
       className="vignette my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl cursor-pointer"
       onClick={() => {
-        setFilters([
-          ...filters,
-          { ...filters[questionNumber], [`${type}`]: `${title}` },
-        ]);
-        const newQuestionNumber = questionNumber + 1;
-        setQuestionNumber(newQuestionNumber);
+        {
+          filters === {}
+            ? setFilters({ [`${type}`]: `${title}` })
+            : setFilters(...filters, { [`${type}`]: `${title}` });
+        }
+        setQuestionNumber(questionNumber + 1);
       }}
     >
       {/* <h1 className="font font-bold">IMAGE</h1> */}
