@@ -1,10 +1,13 @@
 import React from "react";
 import Items from "./Items";
+import style from "../css/Slider.module.css";
 
 const CardPurchase = () => {
   const items = [
     { img: "/home.png", name: "Tourne-vis", price: 35 },
     { img: "/home.png", name: "Perceuse", price: 22 },
+    { img: "/home.png", name: "Marteau", price: 33 },
+    { img: "/home.png", name: "Marteau", price: 33 },
     { img: "/home.png", name: "Marteau", price: 33 },
   ];
 
@@ -30,15 +33,19 @@ const CardPurchase = () => {
         For this products <br />
         you maybe need :
       </h2>
-      {items.map((item) => {
-        return (
-          <>
-            <Items name={item.name} img={item.img} />
-          </>
-        );
-      })}
-      <h3 className="text-2xl">
-        Total:
+      <div className={style.wrapper + " wrapper"}>
+        <div className={style.slider}>
+          {items.map((item) => {
+            return (
+              <>
+                <Items name={item.name} img={item.img} />
+              </>
+            );
+          })}
+        </div>
+      </div>
+      <h3 className="text-2xl font">
+        Total ={" "}
         {Object.keys(items).reduce(function (previous, key) {
           return previous + items[key].price;
         }, 0)}
