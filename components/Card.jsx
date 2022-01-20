@@ -18,7 +18,7 @@ const Card = ({
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
       {
-        params: { filters: filters[questionNumber] },
+        params: { filters: filters[questionNumber-2] },
       }
     );
     const newVignettes = sortVignettes(res.data);
@@ -31,12 +31,9 @@ const Card = ({
     }
     let typeAlreadyExist = [];
     let sortedVignettes = [];
-    console.log("je sais pas : ", typeof vignettes[0][`${question.type}`] )
     if(typeof vignettes[0][`${question.type}`] === "object"){
       vignettes.map((vignette) => {
         vignette[`${question.type}`].map((type) => {
-          console.log('type: ', type)
-          console.log("already exist :", typeAlreadyExist)
           if(!typeAlreadyExist.includes(type)){
             typeAlreadyExist.push(type);
           }
@@ -51,14 +48,12 @@ const Card = ({
         }
       })
     }
-    console.log(sortedVignettes)
     return sortedVignettes
   }
 
   useEffect(() => {
     if(questionNumber >=2){
       getData();
-      console.log("question number useEffect")
     }
   }, [questionNumber]);
 
@@ -66,18 +61,14 @@ const Card = ({
     return "Loading...";
   }
 
-  console.log("vignettes : ", vignettes);
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
         <div onClick={() => {
-          console.log("toto")
-          const newFilters = filters.filter((f, i) => i!== filters.length);
-          console.log("new Filters: ", newFilters);
+          const newFilters = filters.filter((f, i) => i!== filters.length-1);
           setFilters(newFilters);
           const newQuestionNumber = questionNumber -1;
           setQuestionNumber(newQuestionNumber);
-          console.log("newQuestionNumber");
         }}><BackBtn /></div>
         <a href="https://www.manomano.fr/">
           <svg
