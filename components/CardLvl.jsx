@@ -1,10 +1,9 @@
 import React from "react";
 import BackBtn from "./BackBtn";
-import VignetteLookForN1 from "./VignetteLookForN1";
-import VignetteLookForN2 from "./VignetteLookForN2";
-import Link from "next/link";
+import VignetteAvanced from "./VignetteAvanced";
+import VignetteNoob from "./VignetteNoob";
 
-const CardLookingFor = () => {
+const CardLvl = () => {
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -31,14 +30,11 @@ const CardLookingFor = () => {
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 mt-10">
-        <VignetteLookForN2 />
-
-        <Link href="https://www.manomano.fr/" passHref>
-          <VignetteLookForN1 />
-        </Link>
+        <VignetteNoob />
+        <VignetteAvanced />
       </div>
     </div>
   );
 };
 
-export default CardLookingFor;
+export default CardLvl;
