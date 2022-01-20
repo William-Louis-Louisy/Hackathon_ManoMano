@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Vignette from "./Vignette";
 import axios from "axios";
+import Budget from "./Budget";
+import Shape from "./Shape";
 
 const Card = ({
   question,

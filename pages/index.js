@@ -1,4 +1,7 @@
 import Card from "@components/Card";
+import CardShopping from "@components/CardShopping";
+import Loading from "@components/Loading";
+import WelcomeCard from "@components/WelcomeCard";
 import Image from "next/image";
 import { useState } from "react";
 
