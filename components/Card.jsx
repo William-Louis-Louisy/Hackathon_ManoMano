@@ -3,6 +3,7 @@ import Vignette from "./Vignette";
 import axios from "axios";
 import Budget from "./Budget";
 import Shape from "./Shape";
+import BackBtn from "./BackBtn";
 
 const Card = ({
   question,
@@ -17,23 +18,23 @@ const Card = ({
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
       {
-        params: {filters: filters}
+        params: { filters: filters },
       }
     );
-    const newVignettes = sortVignettes(res.data)
+    const newVignettes = sortVignettes(res.data);
     setVignettes(newVignettes);
   }
 
-  function sortVignettes(vignettes){ 
+  function sortVignettes(vignettes) {
     let typeAlreadyExist = [];
 
     let sortedVignettes = vignettes.filter((vignette) => {
-      if(!typeAlreadyExist.includes(vignette[`${question.type}`])){
+      if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
         typeAlreadyExist.push(vignette[`${question.type}`]);
-        return vignette
+        return vignette;
       }
-    })
-    return sortedVignettes
+    });
+    return sortedVignettes;
   }
 
   useEffect(() => {
@@ -47,22 +48,25 @@ const Card = ({
   console.log("vignettes : ", vignettes);
   return (
     <div className="card flex flex-col items-center rounded-2xl">
-      <a href="https://www.manomano.fr/">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 relative left-32 mt-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      </a>
+      <span className="flex flex-row justify-between w-full mx-4 mt-4">
+        <BackBtn />
+        <a href="https://www.manomano.fr/">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 mr-2 text-manoblue"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </a>
+      </span>
       <h2 className="mt-4 text-center text-xl font font-bold">
         {question.content}
       </h2>
