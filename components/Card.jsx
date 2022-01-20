@@ -55,7 +55,9 @@ const Card = ({
   }
 
   useEffect(() => {
-    getData();
+    if(questionNumber >=2){
+      getData();
+    }
   }, [questionNumber]);
 
   if (!vignettes) {
