@@ -31,7 +31,7 @@ const CardLookingFor = () => {
         What you are looking for ?
       </h2>
 
-      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden mt-10">
+      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 mt-10">
         <VignetteLookForN2 />
 
         <Link href="https://www.manomano.fr/" passHref>

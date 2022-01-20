@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
   background-color: #f5f6f7;
   font-family: "Passion One", cursive;
