@@ -44,7 +44,7 @@ const CardPurchase = () => {
           })}
         </div>
       </div>
-      <h3 className="text-2xl font">
+      <h3 className="text-3xl font">
         Total ={" "}
         {Object.keys(items).reduce(function (previous, key) {
           return previous + items[key].price;
