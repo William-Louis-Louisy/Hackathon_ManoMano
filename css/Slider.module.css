@@ -3,8 +3,16 @@
   width: 100%;
   overflow-x: scroll;
   box-sizing: border-box;
-  margin-bottom: 1.5rem;
+  margin-top: 8px;
+  margin-bottom: 8px;
   -ms-overflow-style: none;
+  padding: 0 12px;
+  background-color: #f5f6f7;
+  box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.4);
+  border-right: white solid 2px;
+  border-left: white solid 2px;
+  border-radius: 12px;
+  height: 55%;
 }
 
 .wrapper::-webkit-scrollbar {
