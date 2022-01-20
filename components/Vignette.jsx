@@ -22,7 +22,7 @@ const Vignette = ({ name, type, setFilters, setQuestionNumber, filters, question
     <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
     <div className="vignette my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl"  
     onClick={() => {
-      setFilters([...filters, { ...filters[questionNumber], [`${type}`]: `${name}` }]);
+      setFilters([...filters, { ...filters[questionNumber-2], [`${type}`]: `${name}` }]);
       const newQuestionNumber = questionNumber +1
       setQuestionNumber(newQuestionNumber);
     }}>

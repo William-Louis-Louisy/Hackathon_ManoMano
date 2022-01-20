@@ -69,9 +69,10 @@ export default function IndexPage() {
   ];
 
   console.log("question", userJourney[questionNumber]);
+  console.log(filters);
   return (
     <div className="flex flex-col items-center justify-center space-y-12">
-      {questionNumber >= 2 ? (
+      {questionNumber >= 2 && questionNumber <= 10 ? (
         <Card
           question={userJourney[questionNumber]}
           filters={filters}
@@ -84,7 +85,9 @@ export default function IndexPage() {
       ) : questionNumber === 1 ? (
         <CardLookingFor setQuestionNumber={setQuestionNumber} />
       ) : (
-        ""
+        <div className="flex flex-col items-center justify-center space-y-12">
+          <CardShopping question="Which product do you want?" />
+        </div>
       )}
     </div>
   );
