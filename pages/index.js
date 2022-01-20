@@ -92,6 +92,7 @@ export default function IndexPage() {
           <CardShopping
             setQuestionNumber={setQuestionNumber}
             question="Which product do you want?"
+            filters={filters}
           />
         </div>
       )}

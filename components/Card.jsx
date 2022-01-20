@@ -24,6 +24,7 @@ const Card = ({
           params: { filters: filters[questionNumber-1] },
         }
       );
+      console.log("res.data: ", res.data)
       const newVignettes = sortVignettes(res.data);
       setVignettes(newVignettes);
   }
@@ -34,25 +35,27 @@ const Card = ({
     }
     let typeAlreadyExist = [];
     let sortedVignettes = [];
-    if (typeof vignettes[0][`${question.type}`] === "object") {
-      vignettes.map((vignette) => {
-        vignette[`${question.type}`].map((type) => {
-          if (!typeAlreadyExist.includes(type)) {
-            typeAlreadyExist.push(type);
-          }
-        });
-      });
-      sortedVignettes = typeAlreadyExist.map((type) => {
-        return { [`${question.type}`]: type };
-      });
-    } else {
+    // if (typeof vignettes[0][`${question.type}`] === "object") {
+    //   vignettes.map((vignette) => {
+    //     vignette[`${question.type}`].map((type) => {
+    //       if (!typeAlreadyExist.includes(type)) {
+    //         typeAlreadyExist.push(type);
+    //       }
+    //     });
+    //   });
+    //   sortedVignettes = typeAlreadyExist.map((type) => {
+    //     return { [`${question.type}`]: type };
+    //   });
+    // } else {
       sortedVignettes = vignettes.filter((vignette) => {
+        console.log("vignette : ", vignette)
         if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
           typeAlreadyExist.push(vignette[`${question.type}`]);
           return vignette;
         }
       });
-    }
+    // }
+    console.log("sorted Vignettes : ",sortedVignettes)
     return sortedVignettes;
   }
 
@@ -62,6 +65,7 @@ const Card = ({
     }
   }, [questionNumber]);
 
+  console.log("vignettes", vignettes)
   if (!vignettes) {
     return <Loading />;
   }

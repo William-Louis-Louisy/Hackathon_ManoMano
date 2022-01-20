@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BackBtn from "./BackBtn";
 import ProductCard from "./ProductCard";
 import style from "../css/Slider.module.css";
+import axios from "axios";
 
-function CardShopping({ question, setQuestionNumber }) {
+function CardShopping({ question, filters, setQuestionNumber }) {
+
+  const [products, setProducts] = useState();
+  const [works, setWorks] = useState();
+  
+  async function getWorks(){
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+      {
+        params: { filters: filters[filters.length -1] },
+      }
+    );
+    setWorks(res.data);
+  }
+
+  useEffect(() => {
+    getWorks();
+  }, [])
+  
+  console.log("works from shopping: ", works);
+  console.log(filters[filters.length -1]);
   const items = [
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 35 },
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 22 },
