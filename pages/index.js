@@ -56,23 +56,23 @@ export default function IndexPage() {
       content: "What is your budget (tools and screws include)?",
       type: "price",
     },
-    {
-      questionNumber: 9,
-      content: "Which shape do you want ?",
-      type: "shape",
-    },
-    {
-      questionNumber: 10,
-      content: "Which size do you need ?",
-      type: "size",
-    },
+    // {
+    //   questionNumber: 9,
+    //   content: "Which shape do you want ?",
+    //   type: "shape",
+    // },
+    // {
+    //   questionNumber: 10,
+    //   content: "Which size do you need ?",
+    //   type: "size",
+    // },
   ];
 
   console.log("question", userJourney[questionNumber]);
   console.log(filters);
   return (
     <div className="flex flex-col items-center justify-center space-y-12">
-      {questionNumber >= 2 && questionNumber <= 10 ? (
+      {questionNumber >= 2 && questionNumber <= 8 ? (
         <Card
           question={userJourney[questionNumber]}
           filters={filters}

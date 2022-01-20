@@ -36,7 +36,7 @@ function CardShopping({ question, filters, setQuestionNumber }) {
   return (
     <div className="card flex flex-col items-center rounded-2xl  lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
-        <div onClick={() => setQuestionNumber(10)}><BackBtn /></div>
+        <div onClick={() => setQuestionNumber(8)}><BackBtn /></div>
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
