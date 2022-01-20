@@ -4,6 +4,7 @@ import axios from "axios";
 import Budget from "./Budget";
 import Shape from "./Shape";
 import BackBtn from "./BackBtn";
+import Loading from "./Loading";
 
 import uniqid from "uniqid";
 
@@ -27,50 +28,58 @@ const Card = ({
       setVignettes(newVignettes);
   }
 
-  function sortVignettes(vignettes){ 
-    if(vignettes.length === 0){
-      return [{[`${question.type}`]: ""}]
+  function sortVignettes(vignettes) {
+    if (vignettes.length === 0) {
+      return [{ [`${question.type}`]: "" }];
     }
     let typeAlreadyExist = [];
     let sortedVignettes = [];
-    if(typeof vignettes[0][`${question.type}`] === "object"){
+    if (typeof vignettes[0][`${question.type}`] === "object") {
       vignettes.map((vignette) => {
         vignette[`${question.type}`].map((type) => {
-          if(!typeAlreadyExist.includes(type)){
+          if (!typeAlreadyExist.includes(type)) {
             typeAlreadyExist.push(type);
           }
-        })
-      })
-      sortedVignettes = typeAlreadyExist.map((type) => {return {[`${question.type}`]: type}})
+        });
+      });
+      sortedVignettes = typeAlreadyExist.map((type) => {
+        return { [`${question.type}`]: type };
+      });
     } else {
       sortedVignettes = vignettes.filter((vignette) => {
-        if(!typeAlreadyExist.includes(vignette[`${question.type}`])){
+        if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
           typeAlreadyExist.push(vignette[`${question.type}`]);
-          return vignette
+          return vignette;
         }
-      })
+      });
     }
-    return sortedVignettes
+    return sortedVignettes;
   }
 
   useEffect(() => {
-    if(questionNumber >=2){
+    if (questionNumber >= 2) {
       getData();
     }
   }, [questionNumber]);
 
   if (!vignettes) {
-    return "Loading...";
+    return <Loading />;
   }
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center rounded-2xl pb-12 lg:w-4/5 lg:gap-10 lg:pb-24">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
-        <div onClick={() => {
-          const newFilters = filters.filter((f, i) => i!== filters.length-1);
-          setFilters(newFilters);
-          const newQuestionNumber = questionNumber -1;
-          setQuestionNumber(newQuestionNumber);
-        }}><BackBtn /></div>
+        <div
+          onClick={() => {
+            const newFilters = filters.filter(
+              (f, i) => i !== filters.length - 1
+            );
+            setFilters(newFilters);
+            const newQuestionNumber = questionNumber - 1;
+            setQuestionNumber(newQuestionNumber);
+          }}
+        >
+          <BackBtn />
+        </div>
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -88,11 +97,11 @@ const Card = ({
           </svg>
         </a>
       </span>
-      <h2 className="mt-4 text-center text-xl font font-bold">
+      <h2 className="my-12 mx-6 text-center text-2xl font font-bold">
         {question.content}
       </h2>
 
-      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
+      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 lg:flex-wrap">
         {vignettes.map((vignette) => {
           return (
               <Vignette
