@@ -7,9 +7,7 @@ import { useState } from "react";
 
 export default function IndexPage() {
   const [questionNumber, setQuestionNumber] = useState(3);
-  const [filters, setFilters] = useState({});
-
-  console.log("question number : ", questionNumber);
+  const [filters, setFilters] = useState([{}, {}]);
 
   const userJourney = [
     {
@@ -68,15 +66,25 @@ export default function IndexPage() {
       type: "size",
     },
   ];
+
+  console.log("filters : ", filters);
+  console.log("current filter: ", filters[questionNumber - 2]);
+  console.log("question number: ", questionNumber - 1);
   return (
     <div className="flex flex-col items-center justify-center space-y-12">
-      <Card
-        question={userJourney[questionNumber]}
-        filters={filters}
-        setFilters={setFilters}
-        questionNumber={questionNumber}
-        setQuestionNumber={setQuestionNumber}
-      />
+      {questionNumber >= 2 ? (
+        <Card
+          question={userJourney[questionNumber]}
+          filters={filters}
+          setFilters={setFilters}
+          questionNumber={questionNumber}
+          setQuestionNumber={setQuestionNumber}
+        />
+      ) : questionNumber === 0 ? (
+        <WelcomeCard />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

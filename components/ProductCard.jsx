@@ -2,8 +2,8 @@ import React from "react";
 
 function ProductCard({ url, name, price }) {
   return (
-    <div className="max-w-max">
-      <div className="flex font-sans mt-6 border-manoblue border-t-2 border-b-2">
+    <div className="max-w-max shadow-lg">
+      <div className="flex font-sans">
         <div className="flex-none w-24 relative">
           <img
             src={url}
@@ -16,7 +16,7 @@ function ProductCard({ url, name, price }) {
             <h1 className="flex-auto text-lg font-semibold text-slate-900">
               {name}
             </h1>
-            <div className="text-lg font-semibold text-slate-500">{price}</div>
+            <div className="text-lg font-semibold text-manoblue">{price} €</div>
             <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
               In stock
             </div>
@@ -32,7 +32,7 @@ function ProductCard({ url, name, price }) {
               </button>
             </div>
             <button
-              className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200"
+              className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300"
               type="button"
               aria-label="Like"
             >
