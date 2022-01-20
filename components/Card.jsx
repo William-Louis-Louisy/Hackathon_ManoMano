@@ -96,8 +96,7 @@ const Card = ({
           return (
               <Vignette
                 key={vignette._id}
-                picture={vignette.picture}
-                title={vignette[`${question.type}`]}
+                name={vignette[`${question.type}`]}
                 type={question.type}
                 filters={filters}
                 setFilters={setFilters}
