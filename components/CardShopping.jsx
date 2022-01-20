@@ -3,7 +3,7 @@ import BackBtn from "./BackBtn";
 import ProductCard from "./ProductCard";
 import style from "../css/Slider.module.css";
 
-function CardShopping({ question }) {
+function CardShopping({ question, setQuestionNumber }) {
   const items = [
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 35 },
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 22 },
@@ -15,7 +15,7 @@ function CardShopping({ question }) {
   return (
     <div className="card flex flex-col items-center rounded-2xl  lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
-        <BackBtn />
+        <div onClick={() => setQuestionNumber(10)}><BackBtn /></div>
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"

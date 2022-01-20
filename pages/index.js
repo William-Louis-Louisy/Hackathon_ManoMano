@@ -86,7 +86,10 @@ export default function IndexPage() {
         <CardLookingFor setQuestionNumber={setQuestionNumber} />
       ) : (
         <div className="flex flex-col items-center justify-center space-y-12">
-          <CardShopping question="Which product do you want?" />
+          <CardShopping
+            setQuestionNumber={setQuestionNumber}
+            question="Which product do you want?"
+          />
         </div>
       )}
     </div>
