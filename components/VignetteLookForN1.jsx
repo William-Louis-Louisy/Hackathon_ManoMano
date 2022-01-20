@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -18,7 +17,7 @@ const VignetteLookForN1 = () => {
             className="w-3/5"
           />
           <h1 className="font font-bold pb-2 text-center flex flex-col mt-1">
-            Buy
+            BUY
           </h1>
         </div>
       </Link>
