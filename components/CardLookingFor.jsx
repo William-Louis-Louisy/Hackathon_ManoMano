@@ -27,7 +27,7 @@ const CardLookingFor = ({setQuestionNumber}) => {
         </a>
       </span>
       <h2 className="mt-4 text-center text-xl font font-bold">
-        What you are looking for ?
+        What are you looking for ?
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 mt-10">

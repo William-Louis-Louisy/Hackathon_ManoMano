@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function IndexPage() {
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [filters, setFilters] = useState([{}, {}]);
 
   const userJourney = [
@@ -81,7 +81,10 @@ export default function IndexPage() {
           setQuestionNumber={setQuestionNumber}
         />
       ) : questionNumber === 0 ? (
-        <WelcomeCard setQuestionNumber={setQuestionNumber} />
+        <WelcomeCard
+          question={userJourney[0].content}
+          setQuestionNumber={setQuestionNumber}
+        />
       ) : questionNumber === 1 ? (
         <CardLookingFor setQuestionNumber={setQuestionNumber} />
       ) : (
