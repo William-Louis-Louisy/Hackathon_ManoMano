@@ -21,7 +21,7 @@ const Card = ({
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
         {
-          params: { filters: filters[questionNumber-2] },
+          params: { filters: filters[questionNumber-1] },
         }
       );
       const newVignettes = sortVignettes(res.data);
