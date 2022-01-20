@@ -13,7 +13,7 @@ function CardShopping({ question }) {
   ];
 
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center rounded-2xl  lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
         <BackBtn />
         <a href="https://www.manomano.fr/">
@@ -39,7 +39,7 @@ function CardShopping({ question }) {
           {question}
         </h2>
 
-        <div className={style.wrapper + " wrapper"}>
+        <div className={style.wrapper + " wrapper  lg:flex-wrap"}>
           <div className={style.slider}>
             {items.map((item) => {
               return (

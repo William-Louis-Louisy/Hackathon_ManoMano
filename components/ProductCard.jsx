@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 function ProductCard({ url, name, price }) {
   return (
-    <div className="max-w-max shadow-lg">
+    <div className="max-w-max shadow-lg hover:scale-110 ease-in-out duration-200">
       <div className="flex font-sans">
         <div className="flex-none w-24 relative">
           <img
