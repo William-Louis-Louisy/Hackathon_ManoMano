@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BackBtn from "./BackBtn";
 import ProductCard from "./ProductCard";
 import style from "../css/Slider.module.css";
+import axios from "axios";
 
-function CardShopping({ question }) {
+function CardShopping({ question, filters, setQuestionNumber }) {
+
+  const [products, setProducts] = useState();
+  const [works, setWorks] = useState();
+  
+  async function getWorks(){
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+      {
+        params: { filters: filters[filters.length -1] },
+      }
+    );
+    setWorks(res.data);
+  }
+
+  useEffect(() => {
+    getWorks();
+  }, [])
+  
+  console.log("works from shopping: ", works);
+  console.log(filters[filters.length -1]);
   const items = [
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 35 },
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 22 },
@@ -15,7 +36,7 @@ function CardShopping({ question }) {
   return (
     <div className="card flex flex-col items-center rounded-2xl  lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
-        <BackBtn />
+        <div onClick={() => setQuestionNumber(8)}><BackBtn /></div>
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"

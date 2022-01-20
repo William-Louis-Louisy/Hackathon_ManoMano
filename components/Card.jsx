@@ -6,6 +6,8 @@ import Shape from "./Shape";
 import BackBtn from "./BackBtn";
 import Loading from "./Loading";
 
+import uniqid from "uniqid";
+
 const Card = ({
   question,
   filters,
@@ -16,14 +18,15 @@ const Card = ({
   const [vignettes, setVignettes] = useState();
 
   async function getData() {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
-      {
-        params: { filters: filters[questionNumber - 2] },
-      }
-    );
-    const newVignettes = sortVignettes(res.data);
-    setVignettes(newVignettes);
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+        {
+          params: { filters: filters[questionNumber-1] },
+        }
+      );
+      console.log("res.data: ", res.data)
+      const newVignettes = sortVignettes(res.data);
+      setVignettes(newVignettes);
   }
 
   function sortVignettes(vignettes) {
@@ -32,25 +35,27 @@ const Card = ({
     }
     let typeAlreadyExist = [];
     let sortedVignettes = [];
-    if (typeof vignettes[0][`${question.type}`] === "object") {
-      vignettes.map((vignette) => {
-        vignette[`${question.type}`].map((type) => {
-          if (!typeAlreadyExist.includes(type)) {
-            typeAlreadyExist.push(type);
-          }
-        });
-      });
-      sortedVignettes = typeAlreadyExist.map((type) => {
-        return { [`${question.type}`]: type };
-      });
-    } else {
+    // if (typeof vignettes[0][`${question.type}`] === "object") {
+    //   vignettes.map((vignette) => {
+    //     vignette[`${question.type}`].map((type) => {
+    //       if (!typeAlreadyExist.includes(type)) {
+    //         typeAlreadyExist.push(type);
+    //       }
+    //     });
+    //   });
+    //   sortedVignettes = typeAlreadyExist.map((type) => {
+    //     return { [`${question.type}`]: type };
+    //   });
+    // } else {
       sortedVignettes = vignettes.filter((vignette) => {
+        console.log("vignette : ", vignette)
         if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
           typeAlreadyExist.push(vignette[`${question.type}`]);
           return vignette;
         }
       });
-    }
+    // }
+    console.log("sorted Vignettes : ",sortedVignettes)
     return sortedVignettes;
   }
 
@@ -60,10 +65,10 @@ const Card = ({
     }
   }, [questionNumber]);
 
+  console.log("vignettes", vignettes)
   if (!vignettes) {
     return <Loading />;
   }
-
   return (
     <div className="card flex flex-col items-center rounded-2xl pb-12 lg:w-4/5 lg:gap-10 lg:pb-24">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -103,15 +108,15 @@ const Card = ({
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 lg:flex-wrap">
         {vignettes.map((vignette) => {
           return (
-            <Vignette
-              key={vignette._id}
-              name={vignette[`${question.type}`]}
-              type={question.type}
-              filters={filters}
-              setFilters={setFilters}
-              questionNumber={questionNumber}
-              setQuestionNumber={setQuestionNumber}
-            />
+              <Vignette
+                key={uniqid()}
+                name={vignette[`${question.type}`]}
+                type={question.type}
+                filters={filters}
+                setFilters={setFilters}
+                questionNumber={questionNumber}
+                setQuestionNumber={setQuestionNumber}
+              />
           );
         })}
       </div>

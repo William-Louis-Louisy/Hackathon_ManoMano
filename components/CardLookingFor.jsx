@@ -4,7 +4,7 @@ import VignetteLookForN1 from "./VignetteLookForN1";
 import VignetteLookForN2 from "./VignetteLookForN2";
 import Link from "next/link";
 
-const CardLookingFor = () => {
+const CardLookingFor = ({setQuestionNumber}) => {
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -27,11 +27,11 @@ const CardLookingFor = () => {
         </a>
       </span>
       <h2 className="mt-4 text-center text-xl font font-bold">
-        What you are looking for ?
+        What are you looking for ?
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 mt-10">
-        <VignetteLookForN2 />
+        <div onClick={() => setQuestionNumber(2)}><VignetteLookForN2 /></div>
 
         <Link href="https://www.manomano.fr/" passHref>
           <VignetteLookForN1 />
