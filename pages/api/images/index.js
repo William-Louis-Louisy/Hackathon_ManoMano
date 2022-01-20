@@ -2,8 +2,10 @@ import base from "../../../middlewares/common";
 import Images from "../../../models/images";
 
 async function getImages(req, res) {
-  if (req.body) {
-    const images = await Images.getImagesByType(req.body);
+  console.log("req.query", req.query);
+  if (req.query?.filters) {
+    const images = await Images.getImagesByType(JSON.parse(req.query.filters));
+    console.log("images: ", images);
     res.status(200).send(images);
   }
 }
