@@ -25,14 +25,32 @@ const Card = ({
   }
 
   function sortVignettes(vignettes){ 
+    if(vignettes.length === 0){
+      return [{[`${question.type}`]: ""}]
+    }
     let typeAlreadyExist = [];
-
-    let sortedVignettes = vignettes.filter((vignette) => {
-      if(!typeAlreadyExist.includes(vignette[`${question.type}`])){
-        typeAlreadyExist.push(vignette[`${question.type}`]);
-        return vignette
-      }
-    })
+    let sortedVignettes = [];
+    console.log("je sais pas : ", typeof vignettes[0][`${question.type}`] )
+    if(typeof vignettes[0][`${question.type}`] === "object"){
+      vignettes.map((vignette) => {
+        vignette[`${question.type}`].map((type) => {
+          console.log('type: ', type)
+          console.log("already exist :", typeAlreadyExist)
+          if(!typeAlreadyExist.includes(type)){
+            typeAlreadyExist.push(type);
+          }
+        })
+      })
+      sortedVignettes = typeAlreadyExist.map((type) => {return {[`${question.type}`]: type}})
+    } else {
+      sortedVignettes = vignettes.filter((vignette) => {
+        if(!typeAlreadyExist.includes(vignette[`${question.type}`])){
+          typeAlreadyExist.push(vignette[`${question.type}`]);
+          return vignette
+        }
+      })
+    }
+    console.log(sortedVignettes)
     return sortedVignettes
   }
 

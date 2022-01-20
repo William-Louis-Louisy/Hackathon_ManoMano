@@ -45,7 +45,7 @@ export default function IndexPage() {
     {
       questionNumber: 6,
       content: "For what kind of equipment ?",
-      type: "equipment",
+      type: "rawMaterialList",
     },
     {
       questionNumber: 7,
