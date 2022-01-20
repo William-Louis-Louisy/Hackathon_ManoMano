@@ -3,13 +3,13 @@ import Items from "./Items";
 
 const CardPurchase = () => {
   const items = [
-    { img: "/home.png", name: "Tourne-vis" },
-    { img: "/home.png", name: "Perceuse" },
-    { img: "/home.png", name: "Marteau" },
+    { img: "/home.png", name: "Tourne-vis", price: 35 },
+    { img: "/home.png", name: "Perceuse", price: 22 },
+    { img: "/home.png", name: "Marteau", price: 33 },
   ];
 
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center justify-between rounded-2xl">
       <a href="https://www.manomano.fr/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -37,6 +37,12 @@ const CardPurchase = () => {
           </>
         );
       })}
+      <h3 className="text-2xl">
+        Total:
+        {Object.keys(items).reduce(function (previous, key) {
+          return previous + items[key].price;
+        }, 0)}
+      </h3>
     </div>
   );
 };
