@@ -1,3 +1,4 @@
+import CardLookingFor from "@components/CardLookingFor";
 import React from "react";
 
 const results = () => {
