@@ -18,7 +18,7 @@ const Card = ({
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
       {
-        params: { filters: filters },
+        params: { filters: filters[questionNumber] },
       }
     );
     const newVignettes = sortVignettes(res.data);
@@ -58,6 +58,7 @@ const Card = ({
   useEffect(() => {
     if(questionNumber >=2){
       getData();
+      console.log("question number useEffect")
     }
   }, [questionNumber]);
 
@@ -69,7 +70,15 @@ const Card = ({
   return (
     <div className="card flex flex-col items-center rounded-2xl">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
-        <BackBtn />
+        <div onClick={() => {
+          console.log("toto")
+          const newFilters = filters.filter((f, i) => i!== filters.length);
+          console.log("new Filters: ", newFilters);
+          setFilters(newFilters);
+          const newQuestionNumber = questionNumber -1;
+          setQuestionNumber(newQuestionNumber);
+          console.log("newQuestionNumber");
+        }}><BackBtn /></div>
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -94,8 +103,8 @@ const Card = ({
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
         {vignettes.map((vignette) => {
           return (
-            <>
               <Vignette
+                key={vignette._id}
                 picture={vignette.picture}
                 title={vignette[`${question.type}`]}
                 type={question.type}
@@ -104,7 +113,6 @@ const Card = ({
                 questionNumber={questionNumber}
                 setQuestionNumber={setQuestionNumber}
               />
-            </>
           );
         })}
       </div>
