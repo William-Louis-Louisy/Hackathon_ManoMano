@@ -12,35 +12,9 @@ const Card = ({
 }) => {
   const [vignettes, setVignettes] = useState();
 
+  console.log("initial vignettes", vignettes);
   console.log("logging the filters", filters);
-
-  //   function sortVignettes(vignettes) {
-  //     if (vignettes.length === 0) {
-  //       return [{ [`${question.type}`]: "" }];
-  //     }
-  //     let typeAlreadyExist = [];
-  //     let sortedVignettes = [];
-  //     if (typeof vignettes[0][`${question.type}`] === "object") {
-  //       vignettes.map((vignette) => {
-  //         vignette[`${question.type}`].map((type) => {
-  //           if (!typeAlreadyExist.includes(type)) {
-  //             typeAlreadyExist.push(type);
-  //           }
-  //         });
-  //       });
-  //       sortedVignettes = typeAlreadyExist.map((type) => {
-  //         return { [`${question.type}`]: type };
-  //       });
-  //     } else {
-  //       sortedVignettes = vignettes.filter((vignette) => {
-  //         if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
-  //           typeAlreadyExist.push(vignette[`${question.type}`]);
-  //           return vignette;
-  //         }
-  //       });
-  //     }
-  //     return sortedVignettes;
-  //   }
+  console.log("question nb", questionNumber);
 
   useEffect(() => {
     if (questionNumber === 0 || questionNumber === 1) {
@@ -58,12 +32,45 @@ const Card = ({
   }
 
   async function getData() {
+    console.log("hello");
+    console.log("filter", filters[filters.length - 1]);
     const res = await axios.get("http://localhost:3000/api/works", {
-      params: { filters: filters },
+      params: { filters: filters[filters.length - 1] },
     });
     const foundProjects = res.data;
-    console.log("type", question.type);
-    console.log(foundProjects.map((project) => project[question.type]));
+    const vignettes = foundProjects.map((project) => project[question.type]);
+    const foundVignettes = sortVignettes(vignettes);
+    console.log("finally", foundVignettes);
+    getImages(foundVignettes);
+  }
+
+  function sortVignettes(vignettes) {
+    const vignettesFound = [];
+    vignettes.map((vignette) => {
+      if (typeof vignette === "object") {
+        vignette.map((elem) => {
+          if (vignettesFound.includes(elem) === false)
+            vignettesFound.push(elem);
+        });
+      }
+      if (typeof vignette === "string") {
+        if (vignettesFound.includes(vignette) === false)
+          vignettesFound.push(vignette);
+      }
+    });
+    return vignettesFound;
+  }
+
+  async function getImages(foundVignettes) {
+    const res = await axios.get("http://localhost:3000/api/images", {
+      params: { type: question.type },
+    });
+    const images = res.data;
+    const neededVignettes = [];
+    images.map((image) => {
+      if (foundVignettes.includes(image.name)) neededVignettes.push(image);
+    });
+    setVignettes(neededVignettes);
   }
 
   if (!vignettes) {

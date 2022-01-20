@@ -9,16 +9,14 @@ const Vignette = ({
   filters,
   questionNumber,
 }) => {
-  console.log("that fucking filters", filters);
   return (
     <div
       className="vignette my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl cursor-pointer"
       onClick={() => {
-        {
-          filters === {}
-            ? setFilters({ [`${type}`]: `${title}` })
-            : setFilters(...filters, { [`${type}`]: `${title}` });
-        }
+        setFilters([
+          ...filters,
+          { ...filters[questionNumber], [`${type}`]: `${title}` },
+        ]);
         setQuestionNumber(questionNumber + 1);
       }}
     >
