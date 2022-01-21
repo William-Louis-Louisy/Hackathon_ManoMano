@@ -10,7 +10,7 @@ const VignetteLookForN1 = () => {
         passHref
         onClick={() => setIsClicked((isClicked) => !isClicked)}
       >
-        <div className="vignette my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl">
+        <div className="vignette shadow-lg border-2 border-logofirst my-2 pb-2 pt-4 flex flex-col justify-between items-center rounded-xl bg-gradient-to-tr from-manowhite to-manowhite hover:from-logofirst hover:to-logosecond hover:border-2 hover:border-manoblue ease-in-out duration-150">
           <img
             src="/ajouter-au-panier.png"
             alt="Category image"
