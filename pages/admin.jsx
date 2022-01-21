@@ -21,7 +21,7 @@ const Admin = () => {
     {
       questionNumber: 2,
       content: "In which room(s) precisely ?",
-      type: "rooms",
+      type: "room",
     },
     {
       questionNumber: 3,

@@ -1,10 +1,9 @@
 import React from "react";
 import BackBtn from "./BackBtn";
-import VignetteLookForN1 from "./VignetteLookForN1";
-import VignetteLookForN2 from "./VignetteLookForN2";
-import Link from "next/link";
+import VignetteAvanced from "./VignetteAvanced";
+import VignetteNoob from "./VignetteNoob";
 
-const CardLookingFor = ({ setQuestionNumber }) => {
+const CardLvl = () => {
   return (
     <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
@@ -27,20 +26,15 @@ const CardLookingFor = ({ setQuestionNumber }) => {
         </a>
       </span>
       <h2 className="mt-4 text-center text-2xl lg:text-4xl font font-bold">
-        What are you looking for ?
+        What you are looking for ?
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 mt-10">
-        <div onClick={() => setQuestionNumber(2)}>
-          <VignetteLookForN2 />
-        </div>
-
-        <Link href="https://www.manomano.fr/" passHref>
-          <VignetteLookForN1 />
-        </Link>
+        <VignetteNoob />
+        <VignetteAvanced />
       </div>
     </div>
   );
 };
 
-export default CardLookingFor;
+export default CardLvl;

@@ -4,6 +4,9 @@ import axios from "axios";
 import Budget from "./Budget";
 import Shape from "./Shape";
 import BackBtn from "./BackBtn";
+import Loading from "./Loading";
+
+import uniqid from "uniqid";
 
 const Card = ({
   question,
@@ -15,14 +18,14 @@ const Card = ({
   const [vignettes, setVignettes] = useState();
 
   async function getData() {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
-      {
-        params: { filters: filters[questionNumber - 2] },
-      }
-    );
-    const newVignettes = sortVignettes(res.data);
-    setVignettes(newVignettes);
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+        {
+          params: { filters: filters[questionNumber-1] },
+        }
+      );
+      const newVignettes = sortVignettes(res.data);
+      setVignettes(newVignettes);
   }
 
   function sortVignettes(vignettes) {
@@ -31,25 +34,25 @@ const Card = ({
     }
     let typeAlreadyExist = [];
     let sortedVignettes = [];
-    if (typeof vignettes[0][`${question.type}`] === "object") {
-      vignettes.map((vignette) => {
-        vignette[`${question.type}`].map((type) => {
-          if (!typeAlreadyExist.includes(type)) {
-            typeAlreadyExist.push(type);
-          }
-        });
-      });
-      sortedVignettes = typeAlreadyExist.map((type) => {
-        return { [`${question.type}`]: type };
-      });
-    } else {
+    // if (typeof vignettes[0][`${question.type}`] === "object") {
+    //   vignettes.map((vignette) => {
+    //     vignette[`${question.type}`].map((type) => {
+    //       if (!typeAlreadyExist.includes(type)) {
+    //         typeAlreadyExist.push(type);
+    //       }
+    //     });
+    //   });
+    //   sortedVignettes = typeAlreadyExist.map((type) => {
+    //     return { [`${question.type}`]: type };
+    //   });
+    // } else {
       sortedVignettes = vignettes.filter((vignette) => {
         if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
           typeAlreadyExist.push(vignette[`${question.type}`]);
           return vignette;
         }
       });
-    }
+    // }
     return sortedVignettes;
   }
 
@@ -60,12 +63,11 @@ const Card = ({
   }, [questionNumber]);
 
   if (!vignettes) {
-    return "Loading...";
+    return <Loading />;
   }
-
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
-      <span className="flex flex-row justify-between w-full mx-4 mt-4">
+    <div className="card flex flex-col items-center rounded-2xl pb-12 lg:w-4/5 lg:gap-10 lg:pb-24 shadow-xl">
+      <span className="flex flex-row justify-between w-full mx-4 lg:mx-6 mt-4">
         <div
           onClick={() => {
             const newFilters = filters.filter(
@@ -81,7 +83,7 @@ const Card = ({
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2 text-manoblue"
+            className="h-6 w-6 mr-4 text-manoblue"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -95,17 +97,16 @@ const Card = ({
           </svg>
         </a>
       </span>
-      <h2 className="mt-4 text-center text-xl font font-bold">
+      <h2 className="my-12 mx-6 text-center text-2xl lg:text-4xl font font-bold">
         {question.content}
       </h2>
 
-      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
+      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 lg:flex-wrap">
         {vignettes.map((vignette) => {
           return (
             <Vignette
-              key={vignette._id}
-              picture={vignette.picture}
-              title={vignette[`${question.type}`]}
+              key={uniqid()}
+              name={vignette[`${question.type}`]}
               type={question.type}
               filters={filters}
               setFilters={setFilters}

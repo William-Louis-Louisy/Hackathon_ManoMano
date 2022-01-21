@@ -1,4 +1,5 @@
 import Card from "@components/Card";
+import CardLookingFor from "@components/CardLookingFor";
 import CardShopping from "@components/CardShopping";
 import Loading from "@components/Loading";
 import WelcomeCard from "@components/WelcomeCard";
@@ -6,7 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function IndexPage() {
-  const [questionNumber, setQuestionNumber] = useState(3);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [filters, setFilters] = useState([{}, {}]);
 
   const userJourney = [
@@ -55,24 +56,23 @@ export default function IndexPage() {
       content: "What is your budget (tools and screws include)?",
       type: "price",
     },
-    {
-      questionNumber: 9,
-      content: "Which shape do you want ?",
-      type: "shape",
-    },
-    {
-      questionNumber: 10,
-      content: "Which size do you need ?",
-      type: "size",
-    },
+    // {
+    //   questionNumber: 9,
+    //   content: "Which shape do you want ?",
+    //   type: "shape",
+    // },
+    // {
+    //   questionNumber: 10,
+    //   content: "Which size do you need ?",
+    //   type: "size",
+    // },
   ];
 
-  console.log("filters : ", filters);
-  console.log("current filter: ", filters[questionNumber - 2]);
-  console.log("question number: ", questionNumber - 1);
+  console.log("question", userJourney[questionNumber]);
+  console.log(filters);
   return (
     <div className="flex flex-col items-center justify-center space-y-12">
-      {questionNumber >= 2 ? (
+      {questionNumber >= 2 && questionNumber <= 8 ? (
         <Card
           question={userJourney[questionNumber]}
           filters={filters}
@@ -81,9 +81,20 @@ export default function IndexPage() {
           setQuestionNumber={setQuestionNumber}
         />
       ) : questionNumber === 0 ? (
-        <WelcomeCard />
+        <WelcomeCard
+          question={userJourney[0].content}
+          setQuestionNumber={setQuestionNumber}
+        />
+      ) : questionNumber === 1 ? (
+        <CardLookingFor setQuestionNumber={setQuestionNumber} />
       ) : (
-        ""
+        <div className="flex flex-col items-center justify-center space-y-12">
+          <CardShopping
+            setQuestionNumber={setQuestionNumber}
+            question="Which product do you want?"
+            filters={filters}
+          />
+        </div>
       )}
     </div>
   );

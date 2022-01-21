@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Vignette from "./Vignette";
+import Vignette2 from "./Vignette2";
 import axios from "axios";
 import BackBtn from "./BackBtn";
 
@@ -25,12 +25,13 @@ const Card = ({
   }, [questionNumber]);
 
   async function getFirstQuestions() {
+    console.log("here")
     const res = await axios.get("http://localhost:3000/api/images", {
       params: { type: question.type },
     });
-    console.log("here : ", res.data)
     setVignettes(res.data);
   }
+
 
   async function getData() {
     console.log("hello");
@@ -118,7 +119,7 @@ const Card = ({
         {vignettes.map((vignette) => {
           console.log("vignettes in admin: ", vignette)
           return (
-            <Vignette
+            <Vignette2
               key={vignette._id}
               picture={vignette.imgUrl}
               title={vignette.name}

@@ -5,7 +5,9 @@ async function getWorks(req, res) {
   if (req.query.filters) {
     // console.log("type of query : ", typeof req.query.filters);
     // console.log("handling works");
+    console.log("req.query.filters : ", JSON.parse(req.query.filters));
     const works = await Works.getWorks(JSON.parse(req.query.filters));
+    console.log("works :", works);
     res.status(200).send(works);
   } /* else {
     const works = await Works.getWorks();

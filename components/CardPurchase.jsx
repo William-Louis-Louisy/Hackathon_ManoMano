@@ -13,7 +13,7 @@ const CardPurchase = () => {
   ];
 
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
         <BackBtn />
         <a href="https://www.manomano.fr/">
@@ -48,11 +48,12 @@ const CardPurchase = () => {
           })}
         </div>
       </div>
-      <h3 className="text-2xl font">
+      <h3 className="text-2xl font w-full text-right px-6 pb-2 ">
         Total ={" "}
         {Object.keys(items).reduce(function (previous, key) {
           return previous + items[key].price;
-        }, 0)}
+        }, 0)}{" "}
+        €
       </h3>
     </div>
   );
