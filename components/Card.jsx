@@ -18,15 +18,15 @@ const Card = ({
   const [vignettes, setVignettes] = useState();
 
   async function getData() {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
-        {
-          params: { filters: filters[questionNumber-1] },
-        }
-      );
-      console.log("res.data: ", res.data)
-      const newVignettes = sortVignettes(res.data);
-      setVignettes(newVignettes);
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+      {
+        params: { filters: filters[questionNumber - 1] },
+      }
+    );
+    console.log("res.data: ", res.data);
+    const newVignettes = sortVignettes(res.data);
+    setVignettes(newVignettes);
   }
 
   function sortVignettes(vignettes) {
@@ -47,15 +47,15 @@ const Card = ({
     //     return { [`${question.type}`]: type };
     //   });
     // } else {
-      sortedVignettes = vignettes.filter((vignette) => {
-        console.log("vignette : ", vignette)
-        if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
-          typeAlreadyExist.push(vignette[`${question.type}`]);
-          return vignette;
-        }
-      });
+    sortedVignettes = vignettes.filter((vignette) => {
+      console.log("vignette : ", vignette);
+      if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
+        typeAlreadyExist.push(vignette[`${question.type}`]);
+        return vignette;
+      }
+    });
     // }
-    console.log("sorted Vignettes : ",sortedVignettes)
+    console.log("sorted Vignettes : ", sortedVignettes);
     return sortedVignettes;
   }
 
@@ -65,13 +65,13 @@ const Card = ({
     }
   }, [questionNumber]);
 
-  console.log("vignettes", vignettes)
+  console.log("vignettes", vignettes);
   if (!vignettes) {
     return <Loading />;
   }
   return (
-    <div className="card flex flex-col items-center rounded-2xl pb-12 lg:w-4/5 lg:gap-10 lg:pb-24">
-      <span className="flex flex-row justify-between w-full mx-4 mt-4">
+    <div className="card flex flex-col items-center rounded-2xl pb-12 lg:w-4/5 lg:gap-10 lg:pb-24 shadow-xl">
+      <span className="flex flex-row justify-between w-full mx-4 lg:mx-6 mt-4">
         <div
           onClick={() => {
             const newFilters = filters.filter(
@@ -87,7 +87,7 @@ const Card = ({
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2 text-manoblue"
+            className="h-6 w-6 mr-4 text-manoblue"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -101,22 +101,22 @@ const Card = ({
           </svg>
         </a>
       </span>
-      <h2 className="my-12 mx-6 text-center text-2xl font font-bold">
+      <h2 className="my-12 mx-6 text-center text-2xl lg:text-4xl font font-bold">
         {question.content}
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 lg:flex-wrap">
         {vignettes.map((vignette) => {
           return (
-              <Vignette
-                key={uniqid()}
-                name={vignette[`${question.type}`]}
-                type={question.type}
-                filters={filters}
-                setFilters={setFilters}
-                questionNumber={questionNumber}
-                setQuestionNumber={setQuestionNumber}
-              />
+            <Vignette
+              key={uniqid()}
+              name={vignette[`${question.type}`]}
+              type={question.type}
+              filters={filters}
+              setFilters={setFilters}
+              questionNumber={questionNumber}
+              setQuestionNumber={setQuestionNumber}
+            />
           );
         })}
       </div>

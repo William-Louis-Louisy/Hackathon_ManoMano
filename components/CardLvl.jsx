@@ -5,7 +5,7 @@ import VignetteNoob from "./VignetteNoob";
 
 const CardLvl = () => {
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
         <BackBtn />
         <a href="https://www.manomano.fr/">
@@ -25,7 +25,7 @@ const CardLvl = () => {
           </svg>
         </a>
       </span>
-      <h2 className="mt-4 text-center text-xl font font-bold">
+      <h2 className="mt-4 text-center text-2xl lg:text-4xl font font-bold">
         What you are looking for ?
       </h2>
 
