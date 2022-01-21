@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { forwardRef } from "react";
+import Btn from "./Btn";
 
 const LinkImage = forwardRef(function Img({ onClick, href }, ref) {
   return (
@@ -24,7 +25,12 @@ export default function Header() {
         <Link passHref href="https://www.manomano.fr/">
           <LinkImage />
         </Link>
-        <ShoppingCartIcon sx={{ fontSize: 35 }} className="mr-3" />
+        <div className="flex flex-wrap">
+          <Link passHref href="/admin">
+            <Btn content={"Admin"} />
+          </Link>
+          <ShoppingCartIcon sx={{ fontSize: 45 }} className="ml-14 mr-3" />
+        </div>
       </div>
     </header>
   );
