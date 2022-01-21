@@ -1,6 +1,7 @@
 import Budget from "@components/Budget";
 import CardLookingFor from "@components/CardLookingFor";
 import CardShopping from "@components/CardShopping";
+import ProductCard from "@components/ProductCard";
 import React from "react";
 
 const Results = () => {
