@@ -4,9 +4,9 @@ import VignetteLookForN1 from "./VignetteLookForN1";
 import VignetteLookForN2 from "./VignetteLookForN2";
 import Link from "next/link";
 
-const CardLookingFor = ({setQuestionNumber}) => {
+const CardLookingFor = ({ setQuestionNumber }) => {
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
         <BackBtn />
         <a href="https://www.manomano.fr/">
@@ -26,12 +26,14 @@ const CardLookingFor = ({setQuestionNumber}) => {
           </svg>
         </a>
       </span>
-      <h2 className="mt-4 text-center text-xl font font-bold">
+      <h2 className="mt-4 text-center text-2xl lg:text-4xl font font-bold">
         What are you looking for ?
       </h2>
 
       <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 mt-10">
-        <div onClick={() => setQuestionNumber(2)}><VignetteLookForN2 /></div>
+        <div onClick={() => setQuestionNumber(2)}>
+          <VignetteLookForN2 />
+        </div>
 
         <Link href="https://www.manomano.fr/" passHref>
           <VignetteLookForN1 />

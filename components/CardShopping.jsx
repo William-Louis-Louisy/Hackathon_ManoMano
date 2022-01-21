@@ -5,15 +5,14 @@ import style from "../css/Slider.module.css";
 import axios from "axios";
 
 function CardShopping({ question, filters, setQuestionNumber }) {
-
   const [products, setProducts] = useState();
   const [works, setWorks] = useState();
-  
-  async function getWorks(){
+
+  async function getWorks() {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
       {
-        params: { filters: filters[filters.length -1] },
+        params: { filters: filters[filters.length - 1] },
       }
     );
     setWorks(res.data);
@@ -21,10 +20,10 @@ function CardShopping({ question, filters, setQuestionNumber }) {
 
   useEffect(() => {
     getWorks();
-  }, [])
-  
+  }, []);
+
   console.log("works from shopping: ", works);
-  console.log(filters[filters.length -1]);
+  console.log(filters[filters.length - 1]);
   const items = [
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 35 },
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 22 },
@@ -34,13 +33,15 @@ function CardShopping({ question, filters, setQuestionNumber }) {
   ];
 
   return (
-    <div className="card flex flex-col items-center rounded-2xl  lg:w-4/5 lg:gap-10 pb-6">
+    <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
-        <div onClick={() => setQuestionNumber(8)}><BackBtn /></div>
+        <div onClick={() => setQuestionNumber(8)}>
+          <BackBtn />
+        </div>
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2 text-manoblue"
+            className="h-6 w-6 mr-4 text-manoblue"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -56,7 +57,7 @@ function CardShopping({ question, filters, setQuestionNumber }) {
       </span>
 
       <div className=" flex flex-col items-center ">
-        <h2 className="my-12 mx-6 text-center text-2xl font font-bold">
+        <h2 className="my-12 mx-6 text-center text-2xl lg:text-4xl font font-bold">
           {question}
         </h2>
 
