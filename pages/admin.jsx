@@ -121,7 +121,7 @@ const Admin = () => {
             <input
               type="text"
               id="projectprice"
-              className="bg-manowhite rounded-lg mb-3 h-6 border-2 border-logosecond"
+              className="bg-manowhite rounded-lg mb-3 h-6 border-2 border-logosecond text-center"
               value={projectPrice}
               onChange={(e) => setProjectPrice(e.target.value)}
             ></input>
@@ -132,15 +132,18 @@ const Admin = () => {
               <input
                 type="text"
                 id="projectName"
-                className="bg-manowhite rounded-lg my-3 h-6 border-2 border-logosecond"
+                className="bg-manowhite rounded-lg my-3 h-6 border-2 border-logosecond text-center"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
               />
             </label>{" "}
             <br />
             <button
-              onClick={() => {
-                handlePost();
+              onClick={async () => {
+                await handlePost();
+                router.push({
+                  pathname: "/",
+                });
               }}
               className="my-2 cursor-pointer shadow-md flex justify-center items-center bg-gradient-to-r from-manoblue to-manoblue w-20 h-12 rounded-2xl text-manowhite hover:from-logofirst hover:to-logosecond hover:scale-110"
             >
