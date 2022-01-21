@@ -11,6 +11,9 @@ module.exports = {
         logofirst: "#0397A7",
         logosecond: "#00ECCD",
       },
+      backgroundImage: {
+        bgmano: "url('/bgmano.png')",
+      },
     },
   },
   plugins: [],

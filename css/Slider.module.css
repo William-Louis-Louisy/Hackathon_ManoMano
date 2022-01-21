@@ -1,6 +1,5 @@
 .wrapper {
   display: block;
-  width: 100%;
   overflow-x: scroll;
   box-sizing: border-box;
   margin-top: 8px;

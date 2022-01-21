@@ -13,13 +13,13 @@ const CardPurchase = () => {
   ];
 
   return (
-    <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
+    <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
         <BackBtn />
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2 text-manoblue"
+            className="h-6 w-6 mr-4 text-manoblue"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -33,11 +33,13 @@ const CardPurchase = () => {
           </svg>
         </a>
       </span>
-      <h2 className="mt-4 text-center text-xl font font-bold">
+      <h2 className="my-12 mx-6 text-center text-2xl lg:text-4xl font font-bold">
         For this products <br />
         you may need :
       </h2>
+
       <div className={style.wrapper + " wrapper"}>
+        <span className="text-xl font w-full text-left">Products list :</span>
         <div className={style.slider}>
           {items.map((item) => {
             return (

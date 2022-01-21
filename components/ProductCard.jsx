@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 function ProductCard({ url, name, price }) {
   return (
-    <div className="w-full shadow-lg hover:scale-110 ease-in-out duration-200">
+    <div className="w-full shadow-md hover:scale-105 ease-in-out duration-200 rounded-lg p-2">
       <div className="flex font-sans">
-        <div className="flex-none w-24 relative">
+        <div className="flex-none w-24 overflow-hidden relative">
           <img
             src={url}
             alt=""
