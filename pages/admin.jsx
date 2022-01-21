@@ -1,8 +1,12 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import CreationCard from "../components/CreationCard";
 
 const Admin = () => {
+
+  const router = useRouter();
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [filters, setFilters] = useState([{}]);
   const [projectName, setProjectName] = useState("");
@@ -104,8 +108,11 @@ const Admin = () => {
           </label>{" "}
           <br />
           <button
-            onClick={() => {
-              handlePost();
+            onClick={async () => {
+              await handlePost();
+              router.push({
+                pathname: '/'
+              })
             }}
           >
             SUBMIT
