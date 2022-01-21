@@ -4,13 +4,14 @@
 
 html,
 body {
-  background-color: #f5f6f7;
+  background-color: #0397a7;
   font-family: "Passion One", cursive;
   display: flex;
   flex-direction: column;
   height: 100vh;
   margin: 0;
   padding: 0;
+  background-image: "public/bgmano.png";
 }
 
 .font {
@@ -18,7 +19,7 @@ body {
 }
 
 .background {
-  background-color: #f5f6f7;
+  /* background-color: #f5f6f7; */
 }
 
 .card {
