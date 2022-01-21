@@ -4,10 +4,12 @@ import Product from "../../../models/product";
 
 async function getProducts(req, res) {
   //get Many products by Id
-  if (req.body.listOfProducts) {
+  console.log("query products : ", JSON.parse(req.query.list).list);
+  if (req.query.list) {
     console.log("handling list of products");
-    const listId = req.body.listOfProducts.map((id) => ObjectId(id));
+    const listId = JSON.parse(req.query.list).list.map((id) => ObjectId(id));
     const products = await Product.getManyProductsById(listId);
+    console.log("products :", products);
     res.status(200).send(products);
     // get One product by Id
   } else if (req.body.productId) {

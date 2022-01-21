@@ -3,6 +3,7 @@ import BackBtn from "./BackBtn";
 import ProductCard from "./ProductCard";
 import style from "../css/Slider.module.css";
 import axios from "axios";
+import Loading from "./Loading";
 
 function CardShopping({ question, filters, setQuestionNumber }) {
   const [products, setProducts] = useState();
@@ -12,18 +13,36 @@ function CardShopping({ question, filters, setQuestionNumber }) {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
       {
-        params: { filters: filters[filters.length - 1] },
+        params: { filters: filters[filters.length -2] },
       }
     );
     setWorks(res.data);
   }
 
+  async function getProducts(){
+    const list  = works[0].toolList.concat(works[0].rawMaterialList);
+    console.log("list: ", list);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_HOST_API_URL}/api/products`,
+    {
+      params: { list: {list} },
+    }
+  );
+  setProducts(res.data);
+  }
+
   useEffect(() => {
     getWorks();
-  }, []);
+  }, [])
 
-  console.log("works from shopping: ", works);
-  console.log(filters[filters.length - 1]);
+  useEffect(() => {
+    if(works){
+      if(works.length !==0){
+        getProducts()
+      }
+    }
+  }, [works])
+  
+  console.log("products : ", products)
   const items = [
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 35 },
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 22 },
@@ -31,6 +50,10 @@ function CardShopping({ question, filters, setQuestionNumber }) {
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 44 },
     { img: "/dark-light.jpg", name: "Dark Ligth Mirror", price: 59 },
   ];
+
+  if(!products){
+    return <Loading/>
+  }
 
   return (
     <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
@@ -63,13 +86,13 @@ function CardShopping({ question, filters, setQuestionNumber }) {
 
         <div className={style.wrapper + " wrapper  lg:flex-wrap"}>
           <div className={style.slider}>
-            {items.map((item) => {
+            {products.map((product) => {
               return (
                 <>
                   <ProductCard
-                    url={item.img}
-                    name={item.name}
-                    price={item.price}
+                    url={product.url}
+                    name={product.name}
+                    price={product.price}
                   />
                 </>
               );
