@@ -26,13 +26,12 @@ const Card = ({
   }, [questionNumber]);
 
   async function getFirstQuestions() {
-    console.log("here")
+    console.log("here");
     const res = await axios.get("http://localhost:3000/api/images", {
       params: { type: question.type },
     });
     setVignettes(res.data);
   }
-
 
   async function getData() {
     console.log("hello");
@@ -79,9 +78,9 @@ const Card = ({
   if (!vignettes) {
     return <Loading/>;
   }
-  console.log("vignettes : ", vignettes)
+  console.log("vignettes : ", vignettes);
   return (
-    <div className="card flex flex-col items-center rounded-2xl">
+    <div className="card flex flex-col items-center rounded-2xl shadow-xl lg:w-4/5 lg:gap-10 pb-6">
       <span className="flex flex-row justify-between w-full mx-4 mt-4">
         <div
           onClick={() => {
@@ -98,7 +97,7 @@ const Card = ({
         <a href="https://www.manomano.fr/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2 text-manoblue"
+            className="h-6 w-6 mr-4 text-manoblue"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -112,13 +111,13 @@ const Card = ({
           </svg>
         </a>
       </span>
-      <h2 className="mt-4 text-center text-xl font font-bold">
+      <h2 className="mt-4 text-center text-2xl lg:text-4xl font font-bold">
         {question.content}
       </h2>
 
-      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10 overflow-hidden ">
+      <div className="flex flex-wrap justify-center items-center gap-4 w-auto pt-10">
         {vignettes.map((vignette) => {
-          console.log("vignettes in admin: ", vignette)
+          console.log("vignettes in admin: ", vignette);
           return (
             <Vignette2
               key={vignette._id}

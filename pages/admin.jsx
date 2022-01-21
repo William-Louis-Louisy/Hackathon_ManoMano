@@ -4,7 +4,6 @@ import { useState } from "react";
 import CreationCard from "../components/CreationCard";
 
 const Admin = () => {
-
   const router = useRouter();
 
   const [questionNumber, setQuestionNumber] = useState(0);
@@ -60,7 +59,7 @@ const Admin = () => {
       rooms: filters[filters.length - 1].rooms,
       equipment: filters[filters.length - 1].equipment,
       product: filters[filters.length - 1].product,
-      price: projectPrice
+      price: projectPrice,
     };
     console.log("this obj", obj);
     axios
@@ -69,54 +68,88 @@ const Admin = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-12">
-      <h1>Let's create a new project !</h1>
+    <div className="card flex flex-col pb-12 items-center rounded-2xl lg:w-4/5 lg:pb-24 shadow-xl mx-auto">
+      <h1 className="mt-6 text-center text-4xl lg:text-6xl font font-bold">
+        Let's create a new project !
+      </h1>
       {questionNumber === creationJourney.length ? (
         <div>
-          <h2>Here is the project you created:</h2>
-          <p>
-            This project is best suited for: <span className="">{filters[filters.length - 1].level}</span>
+          <h2 className="mt-12 mx-6 text-center text-2xl lg:text-4xl font font-bold">
+            Here is the project you created:
+          </h2>
+          <p className="mt-6 font-normal">
+            This project is best suited for:{" "}
+            <span className="font-bold text-manoblue">
+              {filters[filters.length - 1].level}
+            </span>
           </p>
-          <p>This project takes place: <span className="text-manoblue">{filters[filters.length - 1].place}</span></p>
-          <p>More precisely in the: {filters[filters.length - 1].rooms}</p>
-          <p>This project is of type: {filters[filters.length - 1].category}</p>
-          <p>
+          <p className="mt-2 font-normal">
+            This project takes place:{" "}
+            <span className="font-bold text-manoblue">
+              {filters[filters.length - 1].place}
+            </span>
+          </p>
+          <p className="mt-2 font-normal">
+            More precisely in the:{" "}
+            <span className="font-bold text-manoblue">
+              {filters[filters.length - 1].rooms}
+            </span>
+          </p>
+          <p className="mt-2 font-normal">
+            This project is of type:{" "}
+            <span className="font-bold text-manoblue">
+              {filters[filters.length - 1].category}
+            </span>
+          </p>
+          <p className="mt-2 font-normal">
             The equipement needed for this project is:{" "}
-            {filters[filters.length - 1].equipment}
+            <span className="font-bold text-manoblue">
+              {filters[filters.length - 1].equipment}
+            </span>
           </p>
-          <p>
+          <p className="mt-2 font-normal">
             The products needed for this project are:{" "}
-            {filters[filters.length - 1].product}
+            <span className="font-bold text-manoblue">
+              {filters[filters.length - 1].product}
+            </span>
           </p>
-          <p>
-            
-            {/* {filters[filters.length - 1].price} */}
+
+          <span className="flex flex-row mt-2 gap-4">
             <label>
-            The approximate budget for this project is:{" "} <br />
+              The approximate budget for this project is: <br />
             </label>
-            <input type="text" id="projectprice" value={projectPrice} onChange={(e) => setProjectPrice(e.target.value)}>
-            </input>
-          </p>
-          <label htmlFor="projectName">
-            Now what is the name of this project ? <br />
             <input
               type="text"
-              id="projectName"
-              value={projectName}
-              onChange={(e) => setProjectName(e.target.value)}
-            />
-          </label>{" "}
-          <br />
-          <button
-            onClick={async () => {
-              await handlePost();
-              router.push({
-                pathname: '/'
-              })
-            }}
-          >
-            SUBMIT
-          </button>
+              id="projectprice"
+              className="bg-manowhite rounded-lg mb-3 h-6 border-2 border-logosecond text-center"
+              value={projectPrice}
+              onChange={(e) => setProjectPrice(e.target.value)}
+            ></input>
+          </span>
+          <div className="flex flex-col items-center p-4 border-manoblue border-2 rounded-xl">
+            <label htmlFor="projectName">
+              Now what is the name of this project ? <br />
+              <input
+                type="text"
+                id="projectName"
+                className="bg-manowhite rounded-lg my-3 h-6 border-2 border-logosecond text-center"
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
+              />
+            </label>{" "}
+            <br />
+            <button
+              onClick={async () => {
+                await handlePost();
+                router.push({
+                  pathname: "/",
+                });
+              }}
+              className="my-2 cursor-pointer shadow-md flex justify-center items-center bg-gradient-to-r from-manoblue to-manoblue w-20 h-12 rounded-2xl text-manowhite hover:from-logofirst hover:to-logosecond hover:scale-110"
+            >
+              SUBMIT
+            </button>
+          </div>
         </div>
       ) : (
         <CreationCard
