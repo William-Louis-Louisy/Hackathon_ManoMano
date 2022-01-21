@@ -2,16 +2,17 @@ import base from "../../../middlewares/common";
 import Works from "../../../models/works";
 
 async function getWorks(req, res) {
-  console.log("req : ", req.query);
   if (req.query.filters) {
-    console.log("type of query : ", typeof req.query.filters);
-    console.log("handling works");
+    // console.log("type of query : ", typeof req.query.filters);
+    // console.log("handling works");
+    console.log("req.query.filters : ", JSON.parse(req.query.filters));
     const works = await Works.getWorks(JSON.parse(req.query.filters));
-    res.status(201).send(works);
-  } else {
+    console.log("works :", works);
+    res.status(200).send(works);
+  } /* else {
     const works = await Works.getWorks();
     res.status(201).send(works);
-  }
+  } */
 }
 
 async function postWork(req, res) {
