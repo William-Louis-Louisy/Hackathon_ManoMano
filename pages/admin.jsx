@@ -1,11 +1,15 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import CreationCard from "../components/CreationCard";
 
 const Admin = () => {
+  const router = useRouter();
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [filters, setFilters] = useState([{}]);
   const [projectName, setProjectName] = useState("");
+  const [projectPrice, setProjectPrice] = useState("");
 
   const creationJourney = [
     {
@@ -28,16 +32,16 @@ const Admin = () => {
       content: "What is the type of this project ?",
       type: "category",
     },
-    // {
-    //   questionNumber: 4,
-    //   content: "What equipment is needed for this project ?",
-    //   type: "equipment",
-    // },
-    // {
-    //   questionNumber: 5,
-    //   content: "What products are needed for this project ?",
-    //   type: "product",
-    // },
+    {
+      questionNumber: 4,
+      content: "What equipment is needed for this project ?",
+      type: "equipment",
+    },
+    {
+      questionNumber: 5,
+      content: "What products are needed for this project ?",
+      type: "product",
+    },
     // {
     //   questionNumber: 6,
     //   content:
@@ -53,8 +57,9 @@ const Admin = () => {
       place: filters[filters.length - 1].place,
       level: filters[filters.length - 1].level,
       rooms: filters[filters.length - 1].rooms,
-      toolList: filters[filters.length - 1].equipment,
-      rawMaterialList: filters[filters.length - 1].product,
+      equipment: filters[filters.length - 1].equipment,
+      product: filters[filters.length - 1].product,
+      price: projectPrice,
     };
     console.log("this obj", obj);
     axios
@@ -108,12 +113,19 @@ const Admin = () => {
               {filters[filters.length - 1].product}
             </span>
           </p>
-          <p className="mt-2 mb-4 font-normal">
-            The approximate budget for this project is:{" "}
-            <span className="font-bold text-manoblue">
-              {filters[filters.length - 1].price}
-            </span>
-          </p>
+
+          <span className="flex flex-row mt-2 gap-4">
+            <label>
+              The approximate budget for this project is: <br />
+            </label>
+            <input
+              type="text"
+              id="projectprice"
+              className="bg-manowhite rounded-lg mb-3 h-6 border-2 border-logosecond"
+              value={projectPrice}
+              onChange={(e) => setProjectPrice(e.target.value)}
+            ></input>
+          </span>
           <div className="flex flex-col items-center p-4 border-manoblue border-2 rounded-xl">
             <label htmlFor="projectName">
               Now what is the name of this project ? <br />
