@@ -19,7 +19,7 @@ const LinkImage = forwardRef(function Img({ onClick, href }, ref) {
 
 export default function Header() {
   return (
-    <header className="bg-white">
+    <header className="bg-white shadow-xl">
       <div className="flex flex-wrap items-center justify-between lg:container mx-auto md:flex-no-wrap md:px-6">
         <Link passHref href="https://www.manomano.fr/">
           <LinkImage />
