@@ -18,15 +18,14 @@ const Card = ({
   const [vignettes, setVignettes] = useState();
 
   async function getData() {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
-      {
-        params: { filters: filters[questionNumber - 1] },
-      }
-    );
-    console.log("res.data: ", res.data);
-    const newVignettes = sortVignettes(res.data);
-    setVignettes(newVignettes);
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_HOST_API_URL}/api/works`,
+        {
+          params: { filters: filters[questionNumber-1] },
+        }
+      );
+      const newVignettes = sortVignettes(res.data);
+      setVignettes(newVignettes);
   }
 
   function sortVignettes(vignettes) {
@@ -47,15 +46,13 @@ const Card = ({
     //     return { [`${question.type}`]: type };
     //   });
     // } else {
-    sortedVignettes = vignettes.filter((vignette) => {
-      console.log("vignette : ", vignette);
-      if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
-        typeAlreadyExist.push(vignette[`${question.type}`]);
-        return vignette;
-      }
-    });
+      sortedVignettes = vignettes.filter((vignette) => {
+        if (!typeAlreadyExist.includes(vignette[`${question.type}`])) {
+          typeAlreadyExist.push(vignette[`${question.type}`]);
+          return vignette;
+        }
+      });
     // }
-    console.log("sorted Vignettes : ", sortedVignettes);
     return sortedVignettes;
   }
 
@@ -65,7 +62,6 @@ const Card = ({
     }
   }, [questionNumber]);
 
-  console.log("vignettes", vignettes);
   if (!vignettes) {
     return <Loading />;
   }

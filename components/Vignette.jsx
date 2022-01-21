@@ -4,15 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import axios from "axios";
 
-const Vignette = ({
-  name,
-  type,
-  setFilters,
-  setQuestionNumber,
-  filters,
-  questionNumber,
-}) => {
-  console.log("name: ", name);
+const Vignette = ({ name, type, setFilters, setQuestionNumber, filters, questionNumber }) => {
   const [imgUrl, setImgUrl] = useState("");
   async function getImage() {
     const res = await axios.get(
