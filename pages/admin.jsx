@@ -1,11 +1,16 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import CreationCard from "../components/CreationCard";
 
 const Admin = () => {
+
+  const router = useRouter();
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [filters, setFilters] = useState([{}]);
   const [projectName, setProjectName] = useState("");
+  const [projectPrice, setProjectPrice] = useState("");
 
   const creationJourney = [
     {
@@ -28,16 +33,16 @@ const Admin = () => {
       content: "What is the type of this project ?",
       type: "category",
     },
-    // {
-    //   questionNumber: 4,
-    //   content: "What equipment is needed for this project ?",
-    //   type: "equipment",
-    // },
-    // {
-    //   questionNumber: 5,
-    //   content: "What products are needed for this project ?",
-    //   type: "product",
-    // },
+    {
+      questionNumber: 4,
+      content: "What equipment is needed for this project ?",
+      type: "equipment",
+    },
+    {
+      questionNumber: 5,
+      content: "What products are needed for this project ?",
+      type: "product",
+    },
     // {
     //   questionNumber: 6,
     //   content:
@@ -53,8 +58,9 @@ const Admin = () => {
       place: filters[filters.length - 1].place,
       level: filters[filters.length - 1].level,
       rooms: filters[filters.length - 1].rooms,
-      toolList: filters[filters.length - 1].equipment,
-      rawMaterialList: filters[filters.length - 1].product,
+      equipment: filters[filters.length - 1].equipment,
+      product: filters[filters.length - 1].product,
+      price: projectPrice
     };
     console.log("this obj", obj);
     axios
@@ -69,9 +75,9 @@ const Admin = () => {
         <div>
           <h2>Here is the project you created:</h2>
           <p>
-            This project is best suited for: {filters[filters.length - 1].level}
+            This project is best suited for: <span className="">{filters[filters.length - 1].level}</span>
           </p>
-          <p>This project takes place: {filters[filters.length - 1].place}</p>
+          <p>This project takes place: <span className="text-manoblue">{filters[filters.length - 1].place}</span></p>
           <p>More precisely in the: {filters[filters.length - 1].rooms}</p>
           <p>This project is of type: {filters[filters.length - 1].category}</p>
           <p>
@@ -83,8 +89,13 @@ const Admin = () => {
             {filters[filters.length - 1].product}
           </p>
           <p>
-            The approximate budget for this project is:{" "}
-            {filters[filters.length - 1].price}
+            
+            {/* {filters[filters.length - 1].price} */}
+            <label>
+            The approximate budget for this project is:{" "} <br />
+            </label>
+            <input type="text" id="projectprice" value={projectPrice} onChange={(e) => setProjectPrice(e.target.value)}>
+            </input>
           </p>
           <label htmlFor="projectName">
             Now what is the name of this project ? <br />
@@ -97,8 +108,11 @@ const Admin = () => {
           </label>{" "}
           <br />
           <button
-            onClick={() => {
-              handlePost();
+            onClick={async () => {
+              await handlePost();
+              router.push({
+                pathname: '/'
+              })
             }}
           >
             SUBMIT
