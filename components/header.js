@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import Link from "next/link";
 import Image from "next/image";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -26,9 +27,9 @@ export default function Header() {
           <LinkImage />
         </Link>
         <div className="flex flex-wrap">
-          <Link passHref href="/admin">
+          <a href="/admin">
             <Btn content={"Admin"} />
-          </Link>
+          </a>
           <ShoppingCartIcon sx={{ fontSize: 45 }} className="ml-14 mr-3" />
         </div>
       </div>
