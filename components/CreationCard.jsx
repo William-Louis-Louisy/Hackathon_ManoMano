@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Vignette2 from "./Vignette2";
 import axios from "axios";
 import BackBtn from "./BackBtn";
+import Loading from "./Loading";
 
 const Card = ({
   question,
@@ -76,7 +77,7 @@ const Card = ({
   }
 
   if (!vignettes) {
-    return "Loading...";
+    return <Loading/>;
   }
   console.log("vignettes : ", vignettes)
   return (
