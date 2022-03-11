@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/taylorbryant/next-starter-tailwind#readme",
   "dependencies": {
-    "@emotion/react": "^11.7.1",
+    "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.6.0",
     "@heroicons/react": "^1.0.5",
     "@material-ui/icons": "^4.11.2",
